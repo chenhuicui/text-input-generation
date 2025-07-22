@@ -1,0 +1,8 @@
+mysql:
+  host: ""
+  port:
+  user: ""
+  password: ""
+  database: ""
+  pool_size: 5
+  pool_name: ""

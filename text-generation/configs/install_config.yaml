@@ -1,0 +1,8 @@
+adb_path: "your/path/to/adb"
+aapt_path: "your/path/to/aapt"
+max_workers: 3
+source: "your/path/to/apk"
+log_config:
+  log_dir: "logs"
+  log_file: "execution.log"
+  log_level: "DEBUG"

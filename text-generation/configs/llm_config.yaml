@@ -1,0 +1,7 @@
+# configs/llm_config.yaml
+llm_config:
+  api_key: ""
+  base_url: ""
+  model_type: "gpt-4o"
+  max_retries: 5
+  verify_ssl: false

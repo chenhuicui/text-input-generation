@@ -1,0 +1,9 @@
+/.venv/
+/.idea/
+/reports/
+.DS_Store
+/installation_results.json
+/logs/
+/window_dump.xml
+/src/expriments/logs/
+/src/expriments/ablation_components/logs/
