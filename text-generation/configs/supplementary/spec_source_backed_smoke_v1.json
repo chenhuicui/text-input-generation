@@ -1,0 +1,387 @@
+{
+  "schema_version": "reviewer2-source-backed-specification-smoke-v1",
+  "protocol_id": "reviewer2-spec-feasibility-pilot-v1",
+  "protocol_status": "draft_smoke_only",
+  "live_run_enabled": false,
+  "scope": {
+    "supplied_specification_integration_only": true,
+    "automatic_hidden_constraint_discovery_claimed": false,
+    "creates_new_main_rq": false,
+    "reporting": "offline_structure_and_android_smoke_only",
+    "model_visible_contract_kind": "public_pre_bug_source_backed_specification",
+    "exact_issue_trigger_model_visible": false,
+    "target_partition_feedback_model_visible": false,
+    "paid_model_calls_authorized": false,
+    "repeat_experiment_authorized": false
+  },
+  "baseline_prompt": {
+    "representation": "extracted/full",
+    "case_registry": "../../output/e2_structure_v1_20260920/case_registry.json",
+    "case_registry_sha256": "6e2dee62d512b8ce9e768ad27d550141ddd26dee61db87c96b9bf91c215fde8e",
+    "source_fields": [
+      "global",
+      "component",
+      "adjacent",
+      "restrictive",
+      "guiding"
+    ],
+    "require_exact_sha256_match": true
+  },
+  "arms": {
+    "P0": "original_extracted_prompt_only",
+    "P1": "original_prompt_plus_public_pre_bug_specification",
+    "P2": "p1_plus_public_execution_feedback_with_hidden_trigger"
+  },
+  "schedule_seed": 20261013,
+  "budget": {
+    "replicates_per_case_arm": 1,
+    "turns_per_trajectory": 1,
+    "max_experimental_paid_requests": 6,
+    "max_qualification_paid_requests": 0,
+    "max_total_paid_requests": 6,
+    "max_total_cost_usd": 1
+  },
+  "model": {
+    "id": "not_invoked_in_smoke",
+    "revision": "not_invoked_in_smoke",
+    "capacity_verified": false,
+    "max_prompt_bytes": 65536,
+    "pricing_usd_per_million_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "max_request_cost_usd": 0.01,
+    "qualification_receipt": null,
+    "qualification_receipt_sha256": null
+  },
+  "runtime": {
+    "api_url": "disabled://offline-smoke",
+    "api_token_env": "DISABLED_SOURCE_BACKED_SMOKE_TOKEN",
+    "api_timeout_seconds": 1,
+    "verify_ssl": false,
+    "provider_cursor_reuse": false,
+    "fresh_provider_context_value": "",
+    "explicit_history_only": true,
+    "max_transport_attempts": 1,
+    "environment_command": [
+      "python3",
+      "-m",
+      "text_input_eval.supplementary.spec_feasibility_android"
+    ],
+    "environment_timeout_seconds": 900
+  },
+  "cases": [
+    {
+      "case_id": "B002",
+      "app": "Debitum",
+      "ui_context": {
+        "description": "The Create Transaction screen contains amount, description, and date inputs and a Save action.",
+        "resource_ids": [
+          "org.ebur.debitum:id/edit_amount",
+          "org.ebur.debitum:id/edit_description",
+          "org.ebur.debitum:id/edit_date_editText"
+        ],
+        "available_action": "Enter the three extracted-prompt fields and activate Save."
+      },
+      "generation_contract": {
+        "contract_id": "B002-debitum-v1.6.2-public-spec-v1",
+        "scope": "Monetary transaction amount entry and representation",
+        "precondition": "The v1.6.2 Create Transaction screen is open and its amount input is editable.",
+        "input_domain": "The amount represents a monetary value. The product documents thousands-separated monetary display and configurable decimal precision.",
+        "action": "Generate values for the original amount, description, and date fields; the evaluator enters them and activates Save.",
+        "required_behavior": [
+          "A monetary value shown by the product remains safely editable and processable.",
+          "Changing the configured decimal precision does not change the represented monetary magnitude.",
+          "The application remains running while it validates or stores the entered transaction."
+        ],
+        "acceptable_outcomes": [
+          "The transaction is accepted with the intended monetary value.",
+          "A non-fatal validation message rejects an unsupported representation."
+        ],
+        "forbidden_outcomes": [
+          "The application process terminates while handling an entered monetary amount.",
+          "The represented amount is silently multiplied or otherwise changes magnitude."
+        ],
+        "provenance_boundary": "Only the Debitum v1.6.2 changelog and bundled user guide are model-visible; all subsequent bug reports and fixes are excluded."
+      },
+      "input": {
+        "resource_ids": [
+          "org.ebur.debitum:id/edit_amount",
+          "org.ebur.debitum:id/edit_description",
+          "org.ebur.debitum:id/edit_date_editText"
+        ],
+        "predicate": "debitum_grouped_amount_v1",
+        "max_chars": 2000
+      },
+      "requirement": {
+        "id": "B002-hidden-evaluator-contract-v1",
+        "version": "debitum-1.6.2-code17",
+        "precondition": "Debitum 1.6.2 (versionCode 17) is restored to the frozen Create Transaction screen.",
+        "input_condition": "The amount is greater than 999 and uses one or more spaces as grouping characters while otherwise containing only digits and an optional decimal fraction.",
+        "action": "Enter all original prompt fields and activate Save.",
+        "expected_postconditions": [
+          "The same App process remains alive and foreground during the frozen observation window."
+        ],
+        "forbidden_postconditions": [
+          "Candidate-bound amount handling terminates the App through an uncaught exception."
+        ],
+        "unknown_conditions": [
+          "The exact installed artifact, reset state, binding, action, or observation window is not established.",
+          "The process disappears without a corroborating crash signature.",
+          "The action or evidence capture is incomplete."
+        ],
+        "out_of_scope": [
+          "Automatic discovery of the hidden issue trigger.",
+          "Correctness of unrelated person, description, image, or date behavior.",
+          "Behavior of versions other than the frozen artifact."
+        ],
+        "sources": [
+          {
+            "source_type": "public_pre_bug_product_documentation",
+            "url": "https://raw.githubusercontent.com/Marmo/debitum/v1.6.2/CHANGELOG.md",
+            "supports": "v1.6.1 documents thousands separators for monetary amounts; v1.6.0 documents configurable decimal places; v1.6.2 records decimal-setting corrections.",
+            "archive_path": "../../output/reviewer2_spec_source_backed_smoke_v1_20261013/sources/B002/debitum-v1.6.2-specification.md",
+            "archive_sha256": "b375e33b3a6a83ec2a5f1c138d59bcf0a3d91a578e7d6cb2c3b32ae95bd96137"
+          },
+          {
+            "source_type": "public_pre_bug_user_guide",
+            "url": "https://raw.githubusercontent.com/Marmo/debitum/v1.6.2/app/src/main/assets/guide_en.html",
+            "supports": "The transaction-creation workflow exposes amount, description, and date inputs and distinguishes money from item transactions.",
+            "archive_path": "../../output/reviewer2_spec_source_backed_smoke_v1_20261013/sources/B002/debitum-v1.6.2-specification.md",
+            "archive_sha256": "b375e33b3a6a83ec2a5f1c138d59bcf0a3d91a578e7d6cb2c3b32ae95bd96137"
+          }
+        ]
+      },
+      "hidden_oracle_provenance": {
+        "url": "https://github.com/Marmo/debitum/issues/86",
+        "model_visible": false,
+        "role": "historical target partition and adjudication only"
+      },
+      "execution": {
+        "package": "org.ebur.debitum",
+        "version_code": "17",
+        "apk_path": "/Volumes/Extreme Pro/tosem-invalid-apks/page02.apk",
+        "apk_sha256": "5669c00791eb96c3d4d13d8bbf9901446fe6b5c4a9da4153f2acc8019f8b3452",
+        "manifest_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/cases/B002/manifest.json",
+        "manifest_sha256": "7fd2452447f422eea1f8e5168c9421f207e60a5b2bf87faacfdc4a59a4018445",
+        "snapshot_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/avd/snapshots/B002_baseline_v1",
+        "device_serial": "emulator-5554",
+        "reset_id": "B002-source-backed-smoke-v1",
+        "reset_command": [
+          "/opt/anaconda3/bin/python3",
+          "-m",
+          "text_input_eval.supplementary.structured_snapshot_reset",
+          "--manifest",
+          "/Volumes/Extreme Pro/emulator/CD_115page_37bug/cases/B002/manifest.json",
+          "--device",
+          "emulator-5554",
+          "--avd",
+          "cd_115page_37bug_api33",
+          "--reset-id",
+          "B002-source-backed-smoke-v1"
+        ],
+        "reset_timeout_seconds": 600,
+        "bindings": {
+          "org.ebur.debitum:id/edit_amount": {
+            "package": "org.ebur.debitum",
+            "class": "android.widget.EditText",
+            "ancestor-resource-id": "org.ebur.debitum:id/edit_amount"
+          },
+          "org.ebur.debitum:id/edit_description": {
+            "package": "org.ebur.debitum",
+            "class": "android.widget.EditText",
+            "ancestor-resource-id": "org.ebur.debitum:id/edit_description"
+          },
+          "org.ebur.debitum:id/edit_date_editText": {
+            "package": "org.ebur.debitum",
+            "class": "android.widget.AutoCompleteTextView",
+            "resource-id": "org.ebur.debitum:id/edit_date_editText"
+          }
+        },
+        "action": {
+          "kind": "structured_actions"
+        },
+        "verify_actions": [
+          {
+            "action": "click",
+            "selector": {
+              "package": "org.ebur.debitum",
+              "resource-id": "org.ebur.debitum:id/miSaveTransaction"
+            }
+          }
+        ],
+        "observation_seconds": 2,
+        "known_blockers": []
+      },
+      "hidden_smoke_fixtures": {
+        "control": {
+          "org.ebur.debitum:id/edit_amount": "12",
+          "org.ebur.debitum:id/edit_description": "",
+          "org.ebur.debitum:id/edit_date_editText": ""
+        },
+        "target": {
+          "org.ebur.debitum:id/edit_amount": "1 000",
+          "org.ebur.debitum:id/edit_description": "",
+          "org.ebur.debitum:id/edit_date_editText": ""
+        }
+      }
+    },
+    {
+      "case_id": "B018",
+      "app": "Masked-Edittext demo",
+      "ui_context": {
+        "description": "The demo screen contains first-name, last-name, email, and masked phone inputs.",
+        "resource_ids": [
+          "mo.must.maskededittextbug:id/first_name",
+          "mo.must.maskededittextbug:id/last_name",
+          "mo.must.maskededittextbug:id/email",
+          "mo.must.maskededittextbug:id/phone"
+        ],
+        "available_action": "Enter all four original prompt fields and observe the settled masked input state."
+      },
+      "generation_contract": {
+        "contract_id": "B018-masked-edittext-68f9ad4-public-spec-v1",
+        "scope": "Numeric masked EditText input and formatted output",
+        "precondition": "The historical Masked-Edittext demo is open and its masked phone widget is visible.",
+        "input_domain": "The documented widget uses numeric input, a mask string, and a designated placeholder symbol for user-supplied positions.",
+        "action": "Generate values for the four original fields; the evaluator enters them and observes the widget state.",
+        "required_behavior": [
+          "Numeric input is mapped into the documented placeholder positions without corrupting fixed mask characters.",
+          "Masked and unmasked output remain consistent with the declared mask and optional returned-data format.",
+          "The widget remains stable while enforcing its numeric input domain."
+        ],
+        "acceptable_outcomes": [
+          "Accepted digits are displayed through the declared mask.",
+          "Unsupported characters are rejected without corrupting the mask or terminating the App."
+        ],
+        "forbidden_outcomes": [
+          "Input handling removes fixed mask characters or leaves the mask in an invalid state.",
+          "The application process terminates while the masked widget handles input."
+        ],
+        "provenance_boundary": "Only the historical component README at commit 68f9ad4 is model-visible; all subsequent bug reports and fixes are excluded."
+      },
+      "input": {
+        "resource_ids": [
+          "mo.must.maskededittextbug:id/first_name",
+          "mo.must.maskededittextbug:id/last_name",
+          "mo.must.maskededittextbug:id/email",
+          "mo.must.maskededittextbug:id/phone"
+        ],
+        "predicate": "masked_edittext_nondigit_v1",
+        "max_chars": 2000
+      },
+      "requirement": {
+        "id": "B018-hidden-evaluator-contract-v1",
+        "version": "masked-edittext-demo-code1",
+        "precondition": "The demo APK is restored to the frozen four-field screen.",
+        "input_condition": "At least one non-empty original prompt field contains a character that is not a decimal digit.",
+        "action": "Enter all original prompt fields and observe the settled masked input state.",
+        "expected_postconditions": [
+          "The same App process remains alive and foreground during the frozen observation window."
+        ],
+        "forbidden_postconditions": [
+          "Candidate-bound masked input handling terminates the App through an uncaught exception."
+        ],
+        "unknown_conditions": [
+          "The exact installed artifact, reset state, binding, action, or observation window is not established.",
+          "The process disappears without a corroborating crash signature.",
+          "The action or evidence capture is incomplete."
+        ],
+        "out_of_scope": [
+          "Automatic discovery of the hidden issue trigger.",
+          "Claims that the frozen overbroad candidate predicate exactly reproduces the complete historical symbol sequence.",
+          "Behavior of versions other than the frozen artifact."
+        ],
+        "sources": [
+          {
+            "source_type": "public_pre_bug_component_readme",
+            "url": "https://raw.githubusercontent.com/pinball83/Masked-Edittext/68f9ad4166fd3af26930c84d5f1ff8b8148ca397/README.md",
+            "supports": "The historical README documents numeric input, the mask, the placeholder symbol, mask-preserving formatting, and masked/unmasked output methods.",
+            "archive_path": "../../output/reviewer2_spec_source_backed_smoke_v1_20261013/sources/B018/masked-edittext-68f9ad4-specification.md",
+            "archive_sha256": "78eefcfe100b56637b0b8ca1681819b223b8411d129d84f0fc24cb2cab23e97f"
+          }
+        ]
+      },
+      "hidden_oracle_provenance": {
+        "url": "https://github.com/pinball83/Masked-Edittext/issues/7",
+        "model_visible": false,
+        "role": "historical target partition and adjudication only",
+        "limitation": "The frozen legacy validator treats any non-digit in any field as TARGET and is broader than the issue's repeated-symbol phone sequence."
+      },
+      "execution": {
+        "package": "mo.must.maskededittextbug",
+        "version_code": "1",
+        "apk_path": "/Volumes/Extreme Pro/tosem-invalid-apks/page18.apk",
+        "apk_sha256": "f7088602e56b61fa8d64ccaa377209533410afb0a3db89523e5fccae44214740",
+        "manifest_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/cases/B018/manifest.json",
+        "manifest_sha256": "3844af7b1816a7601fd03b11769d38a3541e97d2e4fca08aaccfc6e90f016748",
+        "snapshot_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/avd/snapshots/B018_baseline_v1",
+        "device_serial": "emulator-5554",
+        "reset_id": "B018-source-backed-smoke-v1",
+        "reset_command": [
+          "/opt/anaconda3/bin/python3",
+          "-m",
+          "text_input_eval.supplementary.structured_snapshot_reset",
+          "--manifest",
+          "/Volumes/Extreme Pro/emulator/CD_115page_37bug/cases/B018/manifest.json",
+          "--device",
+          "emulator-5554",
+          "--avd",
+          "cd_115page_37bug_api33",
+          "--reset-id",
+          "B018-source-backed-smoke-v1"
+        ],
+        "reset_timeout_seconds": 600,
+        "bindings": {
+          "mo.must.maskededittextbug:id/first_name": {
+            "package": "mo.must.maskededittextbug",
+            "class": "android.widget.EditText",
+            "resource-id": "mo.must.maskededittextbug:id/first_name"
+          },
+          "mo.must.maskededittextbug:id/last_name": {
+            "package": "mo.must.maskededittextbug",
+            "class": "android.widget.EditText",
+            "resource-id": "mo.must.maskededittextbug:id/last_name"
+          },
+          "mo.must.maskededittextbug:id/email": {
+            "package": "mo.must.maskededittextbug",
+            "class": "android.widget.EditText",
+            "resource-id": "mo.must.maskededittextbug:id/email"
+          },
+          "mo.must.maskededittextbug:id/phone": {
+            "package": "mo.must.maskededittextbug",
+            "class": "android.widget.EditText",
+            "resource-id": "mo.must.maskededittextbug:id/phone"
+          }
+        },
+        "action": {
+          "kind": "structured_actions"
+        },
+        "verify_actions": [
+          {
+            "action": "wait",
+            "seconds": 0.25
+          }
+        ],
+        "observation_seconds": 2,
+        "known_blockers": [
+          "The existing B018_baseline_v1 snapshot exposes an empty phone field that crashes on focus before candidate entry, so control and target executions are not discriminative until a new independently qualified baseline is created."
+        ]
+      },
+      "hidden_smoke_fixtures": {
+        "control": {
+          "mo.must.maskededittextbug:id/first_name": "1",
+          "mo.must.maskededittextbug:id/last_name": "2",
+          "mo.must.maskededittextbug:id/email": "3",
+          "mo.must.maskededittextbug:id/phone": "71234567890"
+        },
+        "target": {
+          "mo.must.maskededittextbug:id/first_name": "1",
+          "mo.must.maskededittextbug:id/last_name": "2",
+          "mo.must.maskededittextbug:id/email": "3",
+          "mo.must.maskededittextbug:id/phone": ","
+        }
+      }
+    }
+  ]
+}

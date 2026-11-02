@@ -1,0 +1,27 @@
+# com.peerspace.app.yaml
+
+app_name: "Fox News"
+
+delay_detect:
+    - "Home"
+    - "Search"
+
+navigation_steps:
+  - action: click
+    target: Search
+    by: text
+    retry: 3
+
+  - action: click
+    type: enter
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001f7f"
+    raw_y_hex: "00002623"
+
+verify_disappear:
+  targets:
+    - "All"
+  by: text

@@ -1,0 +1,40 @@
+# com.peerspace.app.yaml
+
+app_name: "Live Weather"
+
+delay_detect:
+    - "Sunrise & Sunset"
+
+navigation_steps:
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002d4c"
+    raw_y_hex: "00000a09"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000784b"
+    raw_y_hex: "00000b84"
+
+verify_action:
+  - action: click
+    target: Search
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000dcc"
+    raw_y_hex: "000014cb"
+
+
+verify_disappear:
+  targets:
+    - "Search"
+  by: text
+
+verify_appear:
+  targets:
+    - "Sunrise & Sunset"
+  by: text

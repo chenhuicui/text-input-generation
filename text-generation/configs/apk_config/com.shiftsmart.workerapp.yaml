@@ -1,0 +1,33 @@
+# com.peerspace.app.yaml
+
+app_name: "Shiftsmart"
+
+delay_detect:
+    - "Get started"
+
+navigation_steps:
+  - action: click
+    target: Get started
+    by: text
+    retry: 3
+
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Continue
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "By providing your phone number, you consent to receiving text messages from Shiftsmart regarding account access, updates, and opportunities."
+  by: text
+
+verify_appear:
+  targets:
+    - "Password"
+  by: text

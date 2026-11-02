@@ -1,0 +1,27 @@
+
+app_name: "Companion"
+
+delay_detect:
+    - "LEARN TO PLAY"
+
+navigation_steps:
+  - action: click
+    target: CARDS
+    by: text
+    retry: 3
+
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "Cancel Search"
+  by: text
+
+verify_appear:
+  targets:
+    - "Name"
+  by: text
+

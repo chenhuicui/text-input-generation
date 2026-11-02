@@ -1,0 +1,19 @@
+app_name: "Fandango"
+
+delay_detect:
+    - "Search"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "3f4c"
+    raw_y_hex: "0ba6"
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_appear:
+  targets:
+    - "If the answer is yes, the problem is ours and we're working on it."
+  by: text

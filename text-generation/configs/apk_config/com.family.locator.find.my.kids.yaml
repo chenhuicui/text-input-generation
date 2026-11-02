@@ -1,0 +1,34 @@
+# com.peerspace.app.yaml
+
+app_name: "FamilyLocator"
+
+delay_detect:
+    - "Add Family Member"
+
+navigation_steps:
+  - action: click
+    target: Add Family Member
+    by: text
+    retry: 3
+
+  - action: click
+    target: Be Located by Parents
+    by: text
+    retry: 3
+
+
+verify_action:
+  - action: click
+    target: Submit
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Submit"
+  by: text
+
+verify_appear:
+  targets:
+    - "Enter invitation Code"
+  by: text

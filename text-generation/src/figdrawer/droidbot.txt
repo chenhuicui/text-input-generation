@@ -1,0 +1,34 @@
+| No.    | appid    | DroidBot    | DroidBot+    | DroidBot+    | DroidBot    | DroidBot+    |
+|---|---|---|---|---|---|---|
+|    |    | Page (DFS)   | Activity (DFS)  | Page (DFS)   | Activity (DFS)  | Page (BFS)   | Activity (BFS)  | Page (BFS)   | Activity (BFS)  |
+| 1    | com.abaenglish.videoclass    | 28    | 10    | 51    | 16    | 22    | 10    | 28    | 11    |
+| 2    | com.add.app    | 7    | 2    | 11    | 2    | 5    | 2    | 6    | 2    |
+| 3    | com.amazon.cosmos    | 27    | 5    | 30    | 6    | 20    | 3    | 25    | 3    |
+| 4    | com.apple.android.music    | 48    | 3    | 83    | 4    | 33    | 3    | 39    | 4    |
+| 5    | com.barnesandnoble.app    | 15    | 2    | 49    | 3    | 12    | 2    | 19    | 2    |
+| 6    | com.bk.pt    | 71    | 4    | 102    | 6    | 53    | 3    | 57    | 3    |
+| 7    | com.brother.ph.brcamera    | 18    | 2    | 21    | 2    | 12    | 2    | 13    | 2    |
+| 8    | com.disney.data.videoplatforms.android.abc    | 47    | 2    | 55    | 2    | 53    | 2    | 53    | 2    |
+| 9    | com.eg.android.AlipayGphone    | 21    | 4    | 26    | 7    | 19    | 4    | 20    | 7    |
+| 10    | com.github.k128.clash.foss    | 25    | 7    | 58    | 7    | 36    | 9    | 46    | 9    |
+| 11    | com.google.android.apps.translate    | 43    | 3    | 68    | 4    | 35    | 3    | 57    | 4    |
+| 12    | com.huawei.maps.app    | 37    | 3    | 57    | 3    | 19    | 1    | 23    | 1    |
+| 13    | com.iconology.comics    | 28    | 4    | 36    | 4    | 24    | 3    | 34    | 4    |
+| 14    | com.ioen.meion    | 35    | 3    | 39    | 4    | 37    | 3    | 41    | 4    |
+| 15    | com.idy.i18n    | 107    | 11    | 127    | 12    | 75    | 3    | 94    | 4    |
+| 16    | com.imcy929.secret/videorecorder    | 32    | 4    | 36    | 4    | 25    | 3    | 32    | 3    |
+| 17    | com.mi.health    | 51    | 7    | 52    | 14    | 29    | 3    | 47    | 10    |
+| 18    | com.originatorkids.EndlessAlphabet    | 9    | 2    | 12    | 2    | 10    | 2    | 11    | 2    |
+| 19    | com.p1.mobile.putong    | 46    | 6    | 65    | 14    | 24    | 4    | 25    | 4    |
+| 20    | com.qooapp.qoohelper    | 30    | 5    | 36    | 6    | 25    | 5    | 27    | 5    |
+| 21    | com.sa.android.article.news    | 7    | 2    | 9    | 3    | 21    | 13    | 22    | 13    |
+| 22    | com.teamsnap.teamsnap    | 7    | 2    | 8    | 2    | 6    | 2    | 6    | 2    |
+| 23    | com.telangana.twallet    | 25    | 5    | 32    | 5    | 18    | 5    | 20    | 5    |
+| 24    | com.valvesoftware.android.steam.community    | 6    | 2    | 13    | 4    | 3    | 2    | 5    | 3    |
+| 25    | com.zillow.android.zillowmap    | 65    | 9    | 84    | 10    | 43    | 7    | 48    | 10    |
+| 26    | enterprises.dating.boo    | 10    | 2    | 23    | 2    | 7    | 2    | 8    | 2    |
+| 27    | org.quantumbadger.recircader    | 26    | 4    | 32    | 4    | 20    | 3    | 37    | 3    |
+| 28    | p1.browser    | 43    | 5    | 58    | 6    | 27    | 3    | 41    | 5    |
+| 29    | tv.dannaku.bili    | 90    | 6    | 93    | 12    | 33    | 9    | 59    | 11    |
+| 30    | uk.co.bbc.bbc.plus    | 18    | 3    | 23    | 3    | 6    | 2    | 6    | 2    |
+| Average    | 34.07    | 4.30    | 46.30    | 5.77    | 25.07    | 3.93    | 31.63    | 4.73    |

@@ -1,0 +1,8 @@
+adb_path: "/opt/homebrew/bin/adb"
+aapt_path: "/Users/cuichenhui/Library/Android/sdk/build-tools/33.0.1/aapt"
+max_workers: 3
+source: "/Volumes/Extreme Pro/ttt/apk/记事本、便签、清单+-+Notein_1.2.9.74_apkcombo.com.xapk"
+log_config:
+  log_dir: "logs"
+  log_file: "execution.log"
+  log_level: "DEBUG"

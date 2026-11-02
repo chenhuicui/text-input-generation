@@ -1,0 +1,56 @@
+# com.peerspace.app.yaml
+
+app_name: "The Dyrt"
+
+delay_detect:
+    - "Start Your Trial"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000070cb"
+    raw_y_hex: "00000bc9"
+
+  - action: click
+    target: Add
+    by: text
+    retry: 3
+
+  - action: click
+    target: Write a Review
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003399"
+    raw_y_hex: "00002bc9"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007465"
+    raw_y_hex: "0000688e"
+
+  - action: swipe
+    raw_fx_hex: "00004465"
+    raw_fy_hex: "0000568a"
+    raw_tx_hex: "00004465"
+    raw_ty_hex: "0000307f"
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+
+verify_disappear:
+  targets:
+    - "Title"
+  by: text
+  timeout: 5
+verify_appear:
+  targets:
+    - "Add Media"
+  by: text
+  timeout: 5

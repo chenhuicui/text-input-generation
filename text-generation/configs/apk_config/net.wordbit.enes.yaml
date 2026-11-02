@@ -1,0 +1,33 @@
+# com.peerspace.app.yaml
+
+app_name: "Wordbit Inglés"
+
+delay_detect:
+    - "Review"
+
+navigation_steps:
+  - action: click
+    type: back
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000009e6"
+    raw_y_hex: "000009a2"
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000010cc"
+    raw_y_hex: "00001afa"
+
+verify_disappear:
+  targets:
+    - "Palabra en inglés"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "OK"
+  by: text
+  timeout: 5

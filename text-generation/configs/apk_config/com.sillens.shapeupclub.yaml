@@ -1,0 +1,41 @@
+# com.peerspace.app.yaml
+
+app_name: "Lifesum"
+
+delay_detect:
+    - "Diary"
+    - "Progress"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000079cb"
+    raw_y_hex: "00003a09"
+
+  - action: click
+    target: Breakfast
+    by: text
+    retry: 3
+
+  - action: click
+    target: Food, meal or brand
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002666"
+    raw_y_hex: "000026cf"
+
+verify_disappear:
+  targets:
+    - "Cancel"
+    - "RESULTS"
+  by: text
+
+verify_appear:
+  targets:
+    - "NUTRITIONAL INFORMATION"
+    - "TRACK"
+  by: text

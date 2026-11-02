@@ -1,0 +1,28 @@
+# com.novanews.localnews.en.yaml
+
+app_name: "Local News"
+
+delay_detect:
+  - "For You"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003f4c"
+    raw_y_hex: "000078f5"
+
+verify_action:
+  - action: click
+    target: Post
+    by: text
+    retry: 3
+
+verify_appear:
+  targets:
+    - "Posting..."
+  by: text
+
+verify_disappear:
+  targets:
+    - "Post"
+  by: text

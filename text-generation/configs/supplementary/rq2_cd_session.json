@@ -1,0 +1,34 @@
+{
+  "protocol_version": "rq2-id-cursor-cd-v2",
+  "cache_root": "../../tosem_major/apk_info/cache",
+  "models": [
+    {"id": "baidu/ernie-5.0-thinking-preview", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "claude-opus-4-6", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "Doubao-Seed-2.0-pro", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "gemini-3.1-pro-preview", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "gpt-5.4-2026-03-05", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "grok-4.20-reasoning", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "kimi/kimi-k2.5", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "mistralai/mistral-large-2512", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false},
+    {"id": "qwen3.5-plus", "max_visible_text_bytes": 1000000, "max_request_bytes": 20000000, "gateway_verified": false}
+  ],
+  "representations": ["extracted", "xml", "vision"],
+  "arms": ["C", "D"],
+  "replicates": 1,
+  "budgets": {"valid_pptr": 3, "invalid_bug": 30},
+  "schedule_seed": 20260908,
+  "endpoint": "behavior",
+  "oracle_manifest": null,
+  "oracle_command": null,
+  "oracle_timeout": 180,
+  "api_url": "http://must.lab.help1.com.cn/api/chat/completions",
+  "api_timeout": 500,
+  "case_ids": [],
+  "refusal_exact_matches": [],
+  "baselines": [
+    {"arm": "A", "path": "../../output/tosem_rq_metrics/rq1_valid_case_level.csv", "metric_scope": "historical_unverified", "budgets": {"valid_pptr": 3, "invalid_bug": 30}},
+    {"arm": "A", "path": "../../output/tosem_rq_metrics/rq1_invalid_case_level.csv", "metric_scope": "historical_unverified", "budgets": {"valid_pptr": 3, "invalid_bug": 30}},
+    {"arm": "B", "path": "../../output/tosem_rq_metrics/rq2_valid_feedback_case_level.csv", "metric_scope": "historical_unverified", "budgets": {"valid_pptr": 3, "invalid_bug": 30}},
+    {"arm": "B", "path": "../../output/tosem_rq_metrics/rq2_invalid_feedback_case_level.csv", "metric_scope": "historical_unverified", "budgets": {"valid_pptr": 3, "invalid_bug": 30}}
+  ]
+}

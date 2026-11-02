@@ -1,0 +1,31 @@
+# com.peerspace.app.yaml
+
+app_name: "Citymapper"
+
+delay_detect:
+    - "Get Me Somewhere"
+
+navigation_steps:
+  - action: click
+    target: Get Me Somewhere
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+    
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003132"
+    raw_y_hex: "00002039"
+
+verify_disappear:
+  targets:
+    - "Show on Map"
+  by: text
+
+verify_appear:
+  targets:
+    - "Current Location"
+  by: text

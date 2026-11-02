@@ -1,0 +1,36 @@
+# com.peerspace.app.yaml
+
+app_name: "Thermometer"
+
+delay_detect:
+    - "Celsius"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000070cb"
+    raw_y_hex: "00000d21"
+
+  - action: click
+    target: Manage Location
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001db2"
+    raw_y_hex: "0000159a"
+
+verify_disappear:
+  targets:
+    - "Search city name"
+  by: text
+
+verify_appear:
+  targets:
+    - "Manage Location"
+  by: text

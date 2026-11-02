@@ -1,0 +1,55 @@
+# com.peerspace.app.yaml
+
+app_name: "Fuelio"
+
+delay_detect:
+    - "My Car"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002f66"
+    raw_y_hex: "00007758"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000707f"
+    raw_y_hex: "00006d20"
+
+  - action: click
+    target: Add reminder
+    by: text
+    retry: 3
+
+  - action: click
+    target: REPEAT EVERY
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Start date
+    by: text
+    retry: 3
+
+  - action: click
+    target: OK
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000077b2"
+    raw_y_hex: "00000b84"
+
+verify_disappear:
+  targets:
+    - "Reminder"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Reminders"
+  by: text
+  timeout: 3

@@ -1,0 +1,8 @@
+mysql:
+  host: "101.200.47.200"
+  port: 3306
+  user: "must_user"
+  password: "REDACTED_USE_ENV_MYSQL_PASSWORD"
+  database: "must_lab_db"
+  pool_size: 5
+  pool_name: "mypool"

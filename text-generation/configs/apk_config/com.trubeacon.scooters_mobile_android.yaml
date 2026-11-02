@@ -1,0 +1,43 @@
+# com.peerspace.app.yaml
+
+app_name: "Scooter's Coffee"
+
+delay_detect:
+    - "Continue as Guest"
+
+navigation_steps:
+
+  - action: click
+    target: Continue as Guest
+    by: text
+    retry: 3
+
+  - action: click
+    target: Find a location
+    by: text
+    retry: 3
+
+  - action: click
+    target: Search City, State, or Zip Code
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000017ff"
+    raw_y_hex: "00002ad8"
+
+verify_disappear:
+  targets:
+    - "Search Locations"
+  by: text
+
+verify_appear:
+  targets:
+    - "Select a Location"
+    - "NEARBY"
+  by: text

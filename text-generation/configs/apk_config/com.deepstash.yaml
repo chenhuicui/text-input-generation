@@ -1,0 +1,39 @@
+# com.peerspace.app.yaml
+
+app_name: "Deepstash"
+
+delay_detect:
+  - "Terms of Service"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000007cc"
+    raw_y_hex: "00000b84"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000032ff"
+    raw_y_hex: "00007849"
+
+  - action: click
+    target: Search...
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+    delay: 5
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002fb2"
+    raw_y_hex: "0000305b"
+
+verify_disappear:
+  targets:
+    - "Top"
+    - "Topics"
+  by: text
+  timeout: 5

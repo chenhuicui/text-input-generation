@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "TuneIn Radio"
+
+delay_detect:
+    - "LIBRARY"
+
+navigation_steps:
+
+  - action: click
+    target: LIBRARY
+    by: text
+    retry: 3
+
+  - action: click
+    target: CUSTOM URL
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: SAVE
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Custom URL"
+    - "SAVE"
+  by: text
+
+verify_appear:
+  targets:
+    - "LIVE"
+  by: text

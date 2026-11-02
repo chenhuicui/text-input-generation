@@ -1,0 +1,69 @@
+# com.peerspace.app.yaml
+
+app_name: "Nihaojewlry"
+
+delay_detect:
+    - "Account"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003eff"
+    raw_y_hex: "00007713"
+
+  - action: click
+    target: Account
+    by: text
+    retry: 3
+
+  - action: swipe
+    raw_fx_hex: "00004465"
+    raw_fy_hex: "0000568a"
+    raw_tx_hex: "00004465"
+    raw_ty_hex: "0000307f"
+
+  - action: click
+    target: Address
+    by: text
+    retry: 3
+
+  - action: click
+    target: Delete
+    by: text
+    retry: 3
+
+  - action: click
+    target: Confirm
+    by: text
+    retry: 3
+
+  - action: click
+    target: "+ Add Address"
+    by: text
+    retry: 3
+
+  - action: swipe
+    raw_fx_hex: "00004032"
+    raw_fy_hex: "00006ff3"
+    raw_tx_hex: "00004032"
+    raw_ty_hex: "000064ca"
+
+verify_action:
+  - action: double_click
+    type: coordinate
+    raw_x_hex: "00003eb2"
+    raw_y_hex: "00007463"
+
+verify_disappear:
+  targets:
+    - "Please fill in your address to get shipping way"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Delete"
+    - "Edit"
+    - "+ Add Address"
+  by: text
+  timeout: 5

@@ -1,0 +1,26 @@
+app_name: "TickPick"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "74b2"
+    raw_y_hex: "0ba6"
+
+  - action: click
+    type: text
+    target: "SMS Notifications"
+
+verify_action:
+  - action: click
+    type: text
+    target: "Save & Continue"
+
+verify_appear:
+  targets:
+    - "Spotify"
+  by: text
+
+verify_disappear:
+  targets:
+    - "Save & Continue"
+  by: text

@@ -1,0 +1,172 @@
+{
+  "schema_version": "e2-abcdef-v2-config-1",
+  "protocol_id": "E2-abcdef-v2",
+  "protocol_status": "formal_ready",
+  "formal_run_enabled": true,
+  "applicability": {
+    "revision": "20260922-explicit-app-behavior-scope-v1",
+    "full_registry_size": 152,
+    "formal_denominator_size": 149,
+    "not_applicable_count": 3,
+    "not_applicable_case_ids": ["P031", "P082", "P104"],
+    "silent_case_removal_prohibited": true,
+    "replacement_oracle_prohibited": true
+  },
+  "representation": {
+    "primary": "extracted",
+    "decision_status": "frozen"
+  },
+  "models": [
+    {
+      "id": "Doubao-Seed-2.0-pro",
+      "gateway_verified": true,
+      "revision_verified": true,
+      "generation_defaults_verified": true,
+      "capacity_verified": true,
+      "fresh_session_isolation_verified": true,
+      "max_prompt_bytes": 65536,
+      "feedback_image_verified": true,
+      "max_feedback_image_bytes": 1911841
+    },
+    {
+      "id": "claude-opus-4-6",
+      "gateway_verified": true,
+      "revision_verified": true,
+      "generation_defaults_verified": true,
+      "capacity_verified": true,
+      "fresh_session_isolation_verified": true,
+      "max_prompt_bytes": 65536,
+      "feedback_image_verified": true,
+      "max_feedback_image_bytes": 1911841
+    }
+  ],
+  "arms": {
+    "A": "stateless_independent_retry",
+    "B": "last_five_candidate_history_only",
+    "C": "candidate_history_plus_pass_fail_unknown",
+    "D": "condition_c_plus_time_ordered_app_screenshots",
+    "E": "condition_d_plus_deterministic_public_ui_changes",
+    "F": "condition_e_plus_fixed_external_evidence_diagnosis_without_advice"
+  },
+  "experimental_unit": {
+    "trajectory_axes": ["model", "case_id", "arm"],
+    "one_trajectory_per_axis_cell": true,
+    "replicate_axis": false,
+    "semantic_success_early_stop": true
+  },
+  "primary_metrics": {
+    "valid_pptr": ["PPTR@1", "PPTR@2", "PPTR@3"],
+    "invalid_bug": ["BugReveal@1", "BugReveal@5", "BugReveal@10", "BugReveal@30"],
+    "secondary": ["New@k", "attempts_per_case", "time_per_attempt"]
+  },
+  "schedule_seed": 20260924,
+  "budgets_including_first_turn": {
+    "valid_pptr": 3,
+    "invalid_bug": 30
+  },
+  "feedback": {
+    "history_limit": 5,
+    "max_candidate_chars": 8000,
+    "candidate_history_excludes_outcome_in_b": true,
+    "status_vocabulary": ["PASS", "FAIL", "UNKNOWN"],
+    "private_oracle_details_prohibited": true,
+    "recommendations_prohibited_in_f": true
+  },
+  "capture_protocol": {
+    "pre_roll_seconds": 0.5,
+    "burst_seconds": [0.0, 0.25, 0.5, 1.0, 2.0],
+    "tail_interval_seconds": 1.0,
+    "record_video": true,
+    "contact_sheet_roles": ["before", "first_changed", "transient_message_peak", "settled"]
+  },
+  "analyzer": {
+    "provider": "must_chat_completions_gateway",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "api_url": "http://must.lab.help1.com.cn/api/chat/completions",
+    "api_key_env": "MUST_LAB_API_TOKEN",
+    "verify_ssl": false,
+    "session_field": "sessionId",
+    "fresh_session_value": "",
+    "image_field": "imageUrl",
+    "reasoning_effort_field": "reasoningEffort",
+    "schema_enforcement": "prompt_plus_fail_closed_local_validation",
+    "resolved_reasoning_effort_returned": false,
+    "api_verified": true,
+    "access_preflight_report": "../../output/e2_abcdef_v1_20261002_formal_doubao_parallel_v1/repair_qualification/f_analyzer_gateway_qualification.json",
+    "strict_json_schema": "execution_diagnosis_v1",
+    "advice_output": false,
+    "outcome_override": false
+  },
+  "storage": {
+    "local_primary": "append_only_sqlite_and_evidence_files",
+    "mysql_mirror_required_for_formal_run": true,
+    "database_env": "MYSQL_DATABASE",
+    "host_env": "MYSQL_HOST",
+    "port_env": "MYSQL_PORT",
+    "user_env": "MYSQL_USER",
+    "password_env": "MYSQL_PASSWORD",
+    "target_database": "must_lab_db",
+    "table_prefix": "e2_abcdef_v2_",
+    "legacy_tables_modified": false,
+    "media_storage": "filesystem_paths_and_sha256_in_mysql",
+    "sync_after_formal_run": true,
+    "qualification_report": "../../output/e2_abcdef_v1_20261002_formal_doubao_parallel_v1/protocol_v2/mysql_mirror_qualification.json"
+  },
+  "oracle_policy": {
+    "same_oracle_across_all_arms": true,
+    "feedback_cannot_change_verdict": true,
+    "infrastructure_error_is_not_fail": true,
+    "page_oracle": "frozen_app_behavior_oracle",
+    "bug_oracle": "frozen_string_predicate_true_means_bug_trigger_condition_satisfied",
+    "bug_app_feedback_is_observational_only": true
+  },
+  "specification_requirements_pilot": {
+    "included_in_main_arms": false,
+    "creates_new_rq": false,
+    "use": "discussion_only_small_integration_pilot",
+    "source_requirement": "traceable_natural_language_requirement_or_specification",
+    "ui_hash_is_not_a_specification": true
+  },
+  "model_request": {
+    "text_fields": ["modelType", "id", "message"],
+    "image_field": "imageUrl",
+    "id_must_equal": "",
+    "provider_cursor_reuse": false,
+    "explicit_history_only": true
+  },
+  "formal_run_gate": {
+    "require_registry_and_oracle_partition_149_plus_3": true,
+    "require_same_oracle_across_arms": true,
+    "require_all_models_text_qualified": true,
+    "require_all_models_feedback_image_qualified": true,
+    "require_page_visual_capture_smoke": true,
+    "require_bug_visual_capture_smoke": true,
+    "require_bug_visual_feedback_contracts": true,
+    "require_analyzer_api_qualified": true,
+    "require_offline_test_suite": true
+  },
+  "runtime": {
+    "api_url": "http://must.lab.help1.com.cn/api/chat/completions",
+    "api_token_env": "MUST_LAB_API_TOKEN",
+    "api_timeout_seconds": 500,
+    "transport_max_attempts": 3,
+    "transport_retry_backoff_seconds": 1.0,
+    "quota_exhaustion_error_type": "quota_exhausted",
+    "quota_exhaustion_next_model": "claude-opus-4-6",
+    "verify_ssl": false,
+    "environment_command": [
+      "/opt/anaconda3/bin/python3",
+      "-m",
+      "text_input_eval.supplementary.abcdef_android_repaired"
+    ],
+    "environment_timeout_seconds": 600,
+    "oracle_manifest": "../../output/e2_structure_v1_20260920/formal_oracles.json",
+    "case_registry": "../../output/e2_structure_v1_20260920/case_registry.json",
+    "formal_exclusions": "../../output/e2_structure_v1_20260920/formal_exclusions_recovered.json",
+    "page_visual_capture_smoke_report": "../../output/e2_abcdef_v1_20260925/page_visual_smoke_v3/report.json",
+    "bug_visual_feedback_contracts": "../../output/e2_abcdef_v1_20260924/bug_app_observation_contracts_20260925.json",
+    "bug_visual_capture_smoke_report": "../../output/e2_abcdef_v1_20260925/bug_visual_smoke_v1/report.json",
+    "refusal_exact_matches": []
+  }
+}

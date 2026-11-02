@@ -1,0 +1,56 @@
+# com.peerspace.app.yaml
+
+app_name: "Virbo"
+
+delay_detect:
+  - "Virbo"
+  - "Home"
+
+navigation_steps:
+
+  - action: click
+    target: Talking Video
+    by: text
+    retry: 3
+
+  - action: click
+    target: Video Avatar
+    by: text
+    retry: 3
+
+  - action: click
+    target: Audrey - Casual
+    by: text
+    retry: 3
+    delay: 15
+
+  - action: click
+    target: Create Video
+    by: text
+    retry: 3
+
+  - action: click
+    target: "Enter text or "
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Confirm
+    by: text
+    retry: 3
+
+  - action: click
+    target: Preview
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Preview"
+  by: text
+
+verify_appear:
+  targets:
+    - "Got it"
+  by: text

@@ -1,0 +1,34 @@
+# com.peerspace.app.yaml
+
+app_name: "TouchTunes"
+
+delay_detect:
+    - "Play"
+
+navigation_steps:
+  - action: click
+    target: Play
+    by: text
+    retry: 3
+
+  - action: click
+    target: Find songs and artists
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002ae6"
+    raw_y_hex: "00001ebe"
+
+verify_disappear:
+  targets:
+    - "All"
+    - "Songs"
+    - "Artists"
+    - "Cancel"
+  by: text

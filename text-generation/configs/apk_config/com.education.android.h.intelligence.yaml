@@ -1,0 +1,36 @@
+# com.peerspace.app.yaml
+
+app_name: "Gauth"
+
+delay_detect:
+    - "Profile"
+
+navigation_steps:
+  - action: click
+    target: Profile
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002966"
+    raw_y_hex: "00000f8d"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Save"
+  by: text
+
+verify_appear:
+  targets:
+    - "Q&A history"
+  by: text

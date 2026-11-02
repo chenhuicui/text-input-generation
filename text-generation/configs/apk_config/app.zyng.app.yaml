@@ -1,0 +1,23 @@
+app_name: "Howbout"
+
+delay_detect:
+    - "Skip"
+
+navigation_steps:
+  - action: click
+    target: Skip
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Continue
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Continue"
+    - "What’s your number?"
+  by: text
+  match_mode: all

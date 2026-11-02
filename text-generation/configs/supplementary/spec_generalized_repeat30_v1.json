@@ -1,0 +1,317 @@
+{
+  "schema_version": "reviewer2-generalized-specification-repeat30-v1",
+  "protocol_id": "reviewer2-spec-feasibility-pilot-v1",
+  "protocol_status": "frozen",
+  "live_run_enabled": true,
+  "scope": {
+    "supplied_specification_integration_only": true,
+    "automatic_hidden_constraint_discovery_claimed": false,
+    "creates_new_main_rq": false,
+    "reporting": "descriptive_feasibility_only",
+    "historical_e2_abcdef_results_are_pilot_results": false,
+    "model_visible_contract_kind": "generalized_behavioral_contract",
+    "exact_issue_trigger_model_visible": false,
+    "target_partition_feedback_model_visible": false
+  },
+  "baseline_prompt": {
+    "representation": "extracted/full",
+    "case_registry": "../../output/e2_structure_v1_20260920/case_registry.json",
+    "case_registry_sha256": "6e2dee62d512b8ce9e768ad27d550141ddd26dee61db87c96b9bf91c215fde8e",
+    "source_fields": [
+      "global",
+      "component",
+      "adjacent",
+      "restrictive",
+      "guiding"
+    ],
+    "require_exact_sha256_match": true,
+    "correction": "The earlier pilot renderer replaced the original task. This corrected protocol reuses the SHA-frozen extracted prompt and the existing A-F candidate parser."
+  },
+  "arms": {
+    "P0": "ui_only_no_requirement_no_semantic_feedback",
+    "P1": "ui_plus_generalized_behavioral_contract_hidden_trigger",
+    "P2": "p1_plus_public_execution_feedback_hidden_trigger"
+  },
+  "schedule_seed": 2026101301,
+  "budget": {
+    "replicates_per_case_arm": 30,
+    "turns_per_trajectory": 3,
+    "max_experimental_paid_requests": 540,
+    "max_qualification_paid_requests": 1,
+    "max_total_paid_requests": 541,
+    "max_total_cost_usd": 2.0
+  },
+  "model": {
+    "id": "claude-opus-4-6",
+    "revision": "claude-opus-4-6",
+    "capacity_verified": true,
+    "max_prompt_bytes": 65536,
+    "feedback_image_verified": false,
+    "max_feedback_image_bytes": null,
+    "pricing_usd_per_million_tokens": {
+      "input": 5.0,
+      "output": 25.0
+    },
+    "max_request_cost_usd": 0.25,
+    "qualification_receipt": "../../output/reviewer2_spec_feasibility_model_qualification_v1_20261012/claude-opus-4-6.json",
+    "qualification_receipt_sha256": "a70337dfb47e338f5b6f8ba43652d3435d149f3d2cb96d639589b602f178061c",
+    "selection_basis": [
+      "same fresh-context gateway can be audited",
+      "three-turn pilot fits the predeclared request and cost caps",
+      "selected before observing pilot outcomes rather than from pilot performance"
+    ]
+  },
+  "runtime": {
+    "api_url": "http://must.lab.help1.com.cn/api/chat/completions",
+    "api_token_env": "MUST_LAB_API_TOKEN",
+    "api_timeout_seconds": 500,
+    "verify_ssl": false,
+    "provider_cursor_reuse": false,
+    "fresh_provider_context_value": "",
+    "explicit_history_only": true,
+    "max_transport_attempts": 1,
+    "environment_command": [
+      "python3",
+      "-m",
+      "text_input_eval.supplementary.spec_feasibility_android"
+    ],
+    "environment_timeout_seconds": 900
+  },
+  "cases": [
+    {
+      "case_id": "B014",
+      "app": "wallabag Android",
+      "ui_context": {
+        "description": "The current screen is the article full-text search overlay with one focused search field.",
+        "resource_id": "fr.gaulupeau.apps.InThePoche:id/search_src_text",
+        "available_action": "Search runs as the text changes; after entering the candidate, observe the settled search screen."
+      },
+      "generation_contract": {
+        "contract_id": "B014-search-robustness-smoke-v1",
+        "scope": "Article full-text search",
+        "precondition": "The search overlay is open and the search field is visible and editable.",
+        "input_domain": "Any text accepted by the search field, including empty text, Unicode text, punctuation-containing text, and syntactically malformed text.",
+        "action": "Enter a query and allow search-as-you-type processing to settle.",
+        "required_behavior": [
+          "The application remains running, foreground, and responsive.",
+          "User-entered text does not cause an uncaught query-processing exception."
+        ],
+        "acceptable_outcomes": [
+          "Matching results are displayed.",
+          "An empty-result state is displayed.",
+          "A non-fatal validation or search error is displayed."
+        ],
+        "forbidden_outcomes": [
+          "The application process terminates.",
+          "An uncaught exception escapes from query processing."
+        ],
+        "provenance_boundary": "This behavioral contract contains no issue-derived trigger predicate."
+      },
+      "input": {
+        "resource_id": "fr.gaulupeau.apps.InThePoche:id/search_src_text",
+        "predicate": "wallabag_malformed_fts_v1",
+        "max_chars": 2000
+      },
+      "requirement": {
+        "id": "B014-local-requirement-v1",
+        "version": "wallabag-android-2.4.2-code228",
+        "precondition": "wallabag Android 2.4.2 (versionCode 228) is on the article full-text search overlay and the search field is visible and editable.",
+        "input_condition": "The query is non-empty and either contains a double quote or begins with a minus immediately followed by a non-whitespace character.",
+        "action": "Enter the query in the search field and allow the search-as-you-type operation to settle.",
+        "expected_postconditions": [
+          "The same App process remains running and foreground during the frozen observation window without an uncaught search-query crash.",
+          "An empty result is an acceptable handling of malformed MATCH syntax."
+        ],
+        "forbidden_postconditions": [
+          "The candidate-bound search action terminates the App through an uncaught SQLite FTS or MATCH exception."
+        ],
+        "unknown_conditions": [
+          "The exact installed version, APK hash, signer, baseline, action, or observation window is not established.",
+          "The App process changes or disappears without corroborating crash evidence.",
+          "Execution evidence is incomplete or infrastructure fails."
+        ],
+        "out_of_scope": [
+          "Search relevance, ranking, and completeness.",
+          "Automatic discovery of the query constraint.",
+          "Behavior of versions other than the frozen test artifact."
+        ],
+        "sources": [
+          {
+            "source_type": "public_issue",
+            "url": "https://github.com/wallabag/android-app/issues/1125",
+            "supports": "Affected version 2.4.2 and the quote/leading-minus crash condition.",
+            "archive_path": "../../output/reviewer2_spec_feasibility_sources_v1_20261012/B014/issue-1125.json",
+            "archive_sha256": "5070132d73cad2ed64af1105fef5f6f37937b369c208b0cb6cf8424ef37fa667"
+          },
+          {
+            "source_type": "merged_fix_pr",
+            "url": "https://github.com/wallabag/android-app/pull/1149",
+            "supports": "Malformed MATCH input is caught and may produce an empty result instead of a crash.",
+            "archive_path": "../../output/reviewer2_spec_feasibility_sources_v1_20261012/B014/pull-1149.json",
+            "archive_sha256": "fd0ad7e2694ef619adeb6b48c824b98d532a9ddbc91399b61d12b9a302bc3c4c"
+          },
+          {
+            "source_type": "version_tag",
+            "url": "https://github.com/wallabag/android-app/blob/2.4.2/app/build.gradle",
+            "supports": "The 2.4.2 source tag declares versionCode 228.",
+            "archive_path": "../../output/reviewer2_spec_feasibility_sources_v1_20261012/B014/tag-2.4.2-build-gradle.json",
+            "archive_sha256": "2d1941b7534d1549612b9ca6bfae0b3d68807ce45b7e6e88bb2a8061ce23d2ae"
+          }
+        ]
+      },
+      "execution": {
+        "package": "fr.gaulupeau.apps.InThePoche",
+        "version_code": "228",
+        "apk_path": "../../output/reviewer2_spec_feasibility_runtime_qualification_v1_20261012/B014/base.apk",
+        "apk_sha256": "92840ede49698e1ded0d876abc7dd57ac71eadb75c736aef4d708c00925c82f2",
+        "apk_signer_sha256": "ba0be9a56f8002c5aa4ddce704cc7b1dfe8e9d8c8e8bfa2526dcb02d9ed73c9b",
+        "manifest_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/cases/B014/manifest.json",
+        "manifest_sha256": "52ed47b66f146253b120f5e1ac69f5c98ec88f94f1643ea7a5ef64c9ef354f06",
+        "snapshot_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/avd/snapshots/B014_baseline_v1",
+        "device_serial": "emulator-5554",
+        "reset_id": "B014-baseline-v1",
+        "reset_command": [
+          "python3",
+          "-m",
+          "text_input_eval.supplementary.spec_feasibility_snapshot_reset",
+          "B014"
+        ],
+        "reset_timeout_seconds": 600,
+        "action": {
+          "kind": "settle_only"
+        },
+        "observation_seconds": 5.0,
+        "required_local_assets": [
+          {
+            "path": "../../tosem_major/text_input_eval/supplementary/spec_feasibility_snapshot_reset.py",
+            "sha256": "46aaa9af676e9910527da19311c89d9816929af08430a28e23685913220e23c5"
+          }
+        ],
+        "runtime_qualification_receipt": "../../output/reviewer2_spec_feasibility_runtime_qualification_v1_20261012/B014/runtime_qualification.json",
+        "runtime_qualification_receipt_sha256": "2b4afd2a96393e8b7d42fb1a905e7228e435aafc9b2f88aefdc4e04ebaa61e24",
+        "known_blockers": []
+      }
+    },
+    {
+      "case_id": "B023",
+      "app": "Nextcloud Notes Android",
+      "ui_context": {
+        "description": "The current screen is an empty note editor with one content field and a visible Preview action.",
+        "resource_id": "it.niedermann.owncloud.notes:id/editContent",
+        "available_action": "Enter the candidate in the note body and activate Preview."
+      },
+      "generation_contract": {
+        "contract_id": "B023-preview-robustness-smoke-v1",
+        "scope": "Markdown note preview",
+        "precondition": "A note is open, its content is editable, and the Preview action is available.",
+        "input_domain": "Any text accepted by the note editor, including empty, incomplete, or malformed Markdown.",
+        "action": "Enter note content and activate Preview.",
+        "required_behavior": [
+          "Preview processing remains safe for every editor-accepted input.",
+          "The application remains running and foreground.",
+          "The original note content is preserved if rendering cannot complete."
+        ],
+        "acceptable_outcomes": [
+          "A rendered preview is shown.",
+          "The raw note is retained as a safe fallback.",
+          "A non-fatal rendering error is shown."
+        ],
+        "forbidden_outcomes": [
+          "The application process terminates.",
+          "Preview causes an uncaught parsing exception.",
+          "The note content is silently lost."
+        ],
+        "provenance_boundary": "This behavioral contract contains no issue-derived trigger predicate."
+      },
+      "input": {
+        "resource_id": "it.niedermann.owncloud.notes:id/editContent",
+        "predicate": "nextcloud_empty_multidigit_list_item_at_eof_v1",
+        "max_chars": 2000
+      },
+      "requirement": {
+        "id": "B023-local-requirement-v1",
+        "version": "nextcloud-notes-android-2.4.0-code63",
+        "precondition": "Nextcloud Notes Android 2.4.0 (versionCode 63) is on a reset empty note, the account/server baseline is healthy, and both the note field and Preview action are visible.",
+        "input_condition": "The final Markdown list item consists of a number with at least two digits followed by a period and no actual item text before end of document.",
+        "action": "Enter the note content and activate Preview.",
+        "expected_postconditions": [
+          "The same App process remains running and foreground during the frozen observation window after Preview is activated.",
+          "Showing a preview or preserving/showing the raw note as a fallback is acceptable; rendering correctness is not separately adjudicated."
+        ],
+        "forbidden_postconditions": [
+          "The candidate-bound Preview action terminates the App through an uncaught string-boundary exception."
+        ],
+        "unknown_conditions": [
+          "The exact installed version, APK hash, signer, account/server baseline, Preview action, or observation window is not established.",
+          "The App process changes or disappears without corroborating crash evidence.",
+          "Account, sync, server, reset, or execution evidence is ambiguous."
+        ],
+        "out_of_scope": [
+          "General Markdown rendering correctness.",
+          "Nextcloud server correctness or broader business conformance.",
+          "Automatic discovery of the list-item constraint.",
+          "Behavior of versions other than the frozen test artifact."
+        ],
+        "sources": [
+          {
+            "source_type": "public_issue",
+            "url": "https://github.com/nextcloud/notes-android/issues/668",
+            "supports": "Affected version 2.4.0 and the empty two-digit numbered-list item crash condition.",
+            "archive_path": "../../output/reviewer2_spec_feasibility_sources_v1_20261012/B023/issue-668.json",
+            "archive_sha256": "67b172f91c6305847719ded18fba6aed75cc23323226fa852fd64c2e1e5fbf60"
+          },
+          {
+            "source_type": "fix_commit",
+            "url": "https://github.com/nextcloud/notes-android/commit/b295bc90503cc71cdacdaffb36ed8cb89b46fe6c",
+            "supports": "The workaround catches the boundary exception and falls back to raw content instead of crashing.",
+            "archive_path": "../../output/reviewer2_spec_feasibility_sources_v1_20261012/B023/commit-b295bc9.json",
+            "archive_sha256": "89cf70ca5c75de5962cb218d6190f66442f8e4bbc5f4afea345c52df9d957a70"
+          },
+          {
+            "source_type": "version_tag",
+            "url": "https://github.com/nextcloud/notes-android/blob/v2.4.0/app/build.gradle",
+            "supports": "The v2.4.0 source tag declares versionCode 63.",
+            "archive_path": "../../output/reviewer2_spec_feasibility_sources_v1_20261012/B023/tag-v2.4.0-build-gradle.json",
+            "archive_sha256": "df7055c222cea8f5c8f52e3612fde967e90126f4a182bbb268da507a46aa1b47"
+          }
+        ]
+      },
+      "execution": {
+        "package": "it.niedermann.owncloud.notes",
+        "version_code": "63",
+        "apk_path": "../../output/reviewer2_spec_feasibility_runtime_qualification_v1_20261012/B023/notes-base.apk",
+        "apk_sha256": "3d31ef074e98f612d662555e25eb9bbae666cbb63e9a2bd9067e3eb5790c23ba",
+        "apk_signer_sha256": "3e80f32df2c89e4cdd3a32f1002178d8d4f21b9da89f8add6abae29fd3c95c0b",
+        "manifest_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/google_eval/cases/B023/manifest.json",
+        "manifest_sha256": "496e37492fff9bf8dd99bbc90239243159a9a9dd95ba4b944a4e914e28da4b62",
+        "snapshot_path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/google_login_api33_avd/snapshots/B023_google_nextcloud_v1",
+        "device_serial": "emulator-5556",
+        "reset_id": "nextcloud:B023:note89:v1",
+        "reset_command": [
+          "python3",
+          "/Volumes/Extreme Pro/emulator/CD_115page_37bug/scripts/nextcloud_case_reset.py",
+          "B023"
+        ],
+        "reset_timeout_seconds": 600,
+        "action": {
+          "kind": "click_resource_id",
+          "resource_id": "it.niedermann.owncloud.notes:id/menu_preview"
+        },
+        "observation_seconds": 5.0,
+        "required_local_assets": [
+          {
+            "path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/scripts/nextcloud_case_reset.py",
+            "sha256": "ccc61c87607890975e5972b9ea59fe082261a36267f3d07d85f7c660d0940235"
+          },
+          {
+            "path": "../../output/reviewer2_spec_feasibility_runtime_qualification_v1_20261012/B023/nextcloud-files-base.apk",
+            "sha256": "59afa3c8b9ee6fd0948f3e81e2fdbf1ee5d3ea777d79412a41fb535dfad360bb"
+          }
+        ],
+        "runtime_qualification_receipt": "../../output/reviewer2_spec_feasibility_runtime_qualification_v1_20261012/B023/runtime_qualification.json",
+        "runtime_qualification_receipt_sha256": "66225722be64178abac7f770a0c9f90783776baca7465e02830c887b80a8b415",
+        "known_blockers": []
+      }
+    }
+  ]
+}

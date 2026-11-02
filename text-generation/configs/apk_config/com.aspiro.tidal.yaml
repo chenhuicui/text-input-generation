@@ -1,0 +1,30 @@
+app_name: "TIDAL"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000041b2"
+    raw_y_hex: "0000795c"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000040cc"
+    raw_y_hex: "00000ba6"
+
+verify_action:
+  - action: click
+    type: enter
+    delay: 3
+
+verify_disappear:
+  targets:
+    - "Search for your favorite artists, tracks, album, videos and playlists."
+  by: text
+  match_mode: all
+
+verify_appear:
+  targets:
+    - "Top results"
+    - "Tracks"
+  by: text
+  match_mode: all

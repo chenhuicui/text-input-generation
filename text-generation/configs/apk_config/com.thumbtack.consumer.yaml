@@ -1,0 +1,32 @@
+# com.peerspace.app.yaml
+
+app_name: "Thumbtack"
+
+delay_detect:
+    - "Search"
+
+navigation_steps:
+
+  - action: click
+    target: Search
+    by: text
+    retry: 3
+
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "Popular services"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Next"
+    - "This doesn't usually happen."
+  by: text
+  timeout: 5
+  mode: any

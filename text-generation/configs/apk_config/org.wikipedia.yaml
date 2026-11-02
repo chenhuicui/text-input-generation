@@ -1,0 +1,77 @@
+# com.peerspace.app.yaml
+
+app_name: "Wikipedia"
+
+delay_detect:
+    - "More"
+
+navigation_steps:
+  - action: click
+    target: More
+    by: text
+    retry: 3
+
+  - action: click
+    target: Settings
+    by: text
+    retry: 3
+
+  - action: click
+    target: Wikipedia languages
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007a18"
+    raw_y_hex: "00000beb"
+
+  - action: click
+    target: Remove language
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000a7f"
+    raw_y_hex: "00001b1d"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000078e5"
+    raw_y_hex: "00000b84"
+
+  - action: click
+    target: OK
+    by: text
+    retry: 3
+
+  - action: click
+    target: Add language
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000078e5"
+    raw_y_hex: "00000b3f"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000e19"
+    raw_y_hex: "00001b3f"
+
+verify_disappear:
+  targets:
+    - "All languages"
+  by: text
+
+verify_appear:
+  targets:
+    - "Your languages"
+    - "Add language"
+  by: text

@@ -1,0 +1,32 @@
+# com.peerspace.app.yaml
+
+app_name: "Tabs"
+
+delay_detect:
+    - "Explore"
+    - "What do you want to play?"
+
+navigation_steps:
+  - action: click
+    target: "What do you want to play?"
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000021e6"
+    raw_y_hex: "000022e9"
+
+verify_disappear:
+  targets:
+    - "Cancel"
+  by: text
+
+verify_appear:
+  targets:
+    - "Chords"
+  by: text

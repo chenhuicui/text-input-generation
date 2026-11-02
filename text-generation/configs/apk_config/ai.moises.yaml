@@ -1,0 +1,34 @@
+app_name: "Moises"
+
+delay_detect:
+  - "Songs"
+  - "Setlists"
+
+navigation_steps:
+  - action: click
+    target: Setlists
+    by: text
+    retry: 3
+
+  - action: click
+    target: New
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Create
+    by: text
+    retry: 3
+
+verify_appear:
+  targets:
+    - "Title"
+    - "New setlist"
+    - "Create"
+  by: text
+
+verify_disappear:
+  targets:
+    - "This setlist is currently empty"
+  by: text

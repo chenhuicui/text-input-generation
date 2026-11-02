@@ -1,0 +1,25 @@
+app_name: "ChatOn AI"
+
+delay_detect:
+  - "ChatOn"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000797f"
+    raw_y_hex: "00000b3f"
+
+  - action: click
+    type: text
+    target: Create account
+
+verify_action:
+  - action: click
+    type: text
+    target: Continue
+
+verify_appear:
+  targets:
+    - "Sign in via email"
+    - "Confirm"
+  by: text

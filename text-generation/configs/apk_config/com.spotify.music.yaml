@@ -1,0 +1,52 @@
+# com.peerspace.app.yaml
+
+app_name: "Spotify"
+
+delay_detect:
+    - "All"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007418"
+    raw_y_hex: "000079e6"
+
+  - action: click
+    target: Playlist
+    by: text
+    retry: 3
+
+  - action: click
+    target: Create
+    by: text
+    retry: 3
+
+  - action: click
+    target: Edit
+    by: text
+    retry: 3
+
+  - action: click
+    target: Add description
+    by: text
+    retry: 3
+
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Start adding to your playlist. You'll be able to edit it here."
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Recommended Songs"
+    - "To help us recommend songs, try adding some music to your playlist."
+  by: text
+  timeout: 3

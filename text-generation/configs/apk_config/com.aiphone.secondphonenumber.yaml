@@ -1,0 +1,46 @@
+# com.peerspace.app.yaml
+
+app_name: "AI Phone"
+
+delay_detect:
+    - "Inbox"
+    - "Make a trial call"
+
+navigation_steps:
+  - action: click
+    target: Inbox
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000767f"
+    raw_y_hex: "000009e7"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000767f"
+    raw_y_hex: "000009e7"
+
+  - action: click
+    target: Add Phone Number
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "First Name"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Contacts"
+  by: text
+  timeout: 3

@@ -1,0 +1,42 @@
+# com.peerspace.app.yaml
+
+app_name: "Literie"
+
+delay_detect:
+  - "Search"
+
+navigation_steps:
+  - action: click
+    target: Search
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000076cb"
+    raw_y_hex: "00000e34"
+
+  - action: click
+    target: Delete
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003699"
+    raw_y_hex: "0000184a"
+
+verify_disappear:
+  targets:
+    - "Cancel"
+  by: text
+
+verify_appear:
+  targets:
+    - "Read"
+    - "Introduction"
+  by: text

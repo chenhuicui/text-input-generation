@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "Duolingo"
+
+delay_detect:
+    - "开始"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00004a19"
+    raw_y_hex: "000077e2"
+
+  - action: click
+    target: 登录
+    by: text
+    retry: 3
+
+  - action: click
+    target: 使用邮箱登录
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: 登录
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "登录"
+    - "忘记密码"
+  by: text
+  timeout: 5

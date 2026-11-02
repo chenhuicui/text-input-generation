@@ -1,0 +1,36 @@
+app_name: "Redfin"
+
+delay_detect:
+    - "Find Homes"
+
+navigation_steps:
+  - action: click
+    target: My Redfin
+    by: text
+    retry: 3
+
+  - action: click
+    target: Saved Searches
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000594c"
+    raw_y_hex: "00002742"
+
+verify_action:
+  - action: click
+    target: UPDATE
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Edit Saved Search"
+  by: text
+
+verify_appear:
+  targets:
+    - "Saved Searches"
+  by: text

@@ -1,0 +1,34 @@
+# com.peerspace.app.yaml
+
+app_name: "AI Dress Up"
+
+delay_detect:
+    - "GENERATE OUTFIT"
+
+navigation_steps:
+  - action: click
+    target: GENERATE OUTFIT
+    by: text
+    retry: 3
+
+  - action: click
+    target: Use your own description
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: OK
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Type"
+    - "Color"
+  by: text
+
+verify_appear:
+  targets:
+    - "Choose your photo from:"
+  by: text

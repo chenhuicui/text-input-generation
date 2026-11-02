@@ -1,0 +1,24 @@
+# com.peerspace.app.yaml
+
+app_name: "Timestamp Camera Free"
+
+delay_detect:
+  - "Test Ad"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000074b2"
+    raw_y_hex: "00006c97"
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Settings"
+    - "Save"
+  by: text

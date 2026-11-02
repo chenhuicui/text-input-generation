@@ -1,0 +1,31 @@
+# com.peerspace.app.yaml
+
+app_name: "Omio"
+
+delay_detect:
+  - "Search Omio"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003865"
+    raw_y_hex: "00002b3f"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000184c"
+    raw_y_hex: "00001ba6"
+
+verify_appear:
+  targets:
+    - "Search Omio"
+  by: text
+
+verify_disappear:
+  targets:
+    - "Departure"
+  by: text

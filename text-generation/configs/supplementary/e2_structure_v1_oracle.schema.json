@@ -1,0 +1,569 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "e2-structure-v1-oracle.schema.json",
+  "title": "E2-structure-v1 per-case evaluation oracle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "version", "task"],
+  "allOf": [
+    {
+      "if": {
+        "properties": {"task": {"const": "invalid_bug"}},
+        "required": ["task"]
+      },
+      "then": {
+        "required": ["oracle_kind", "predicate"],
+        "properties": {"oracle_kind": {"const": "string_predicate"}}
+      },
+      "else": {
+        "required": [
+          "aut",
+          "app_artifact",
+          "binding",
+          "begin_attempt",
+          "execute_turn",
+          "recover_turn",
+          "goal_assertion",
+          "diagnostic_targets",
+          "calibration"
+        ],
+        "properties": {"oracle_kind": {"const": "app_behavior"}}
+      }
+    }
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^[PB][0-9]{3}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task": {
+      "enum": [
+        "valid_pptr",
+        "invalid_bug"
+      ]
+    },
+    "oracle_kind": {
+      "enum": ["app_behavior", "string_predicate"]
+    },
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "validator_path",
+        "validator_sha256",
+        "required_resource_ids",
+        "true_means",
+        "control_pair_verified",
+        "positive_control_sha256",
+        "negative_control_sha256"
+      ],
+      "properties": {
+        "validator_path": {"type": "string", "minLength": 1},
+        "validator_sha256": {"$ref": "#/$defs/sha256"},
+        "required_resource_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "true_means": {"const": "bug_revealed"},
+        "control_pair_verified": {"const": true},
+        "positive_control_sha256": {"$ref": "#/$defs/sha256"},
+        "negative_control_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "aut": {
+      "type": "string",
+      "minLength": 1
+    },
+    "device_serial": {
+      "type": "string",
+      "minLength": 1
+    },
+    "binding_review_resolved": {
+      "const": true
+    },
+    "app_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version_code",
+        "sha256",
+        "install_kind"
+      ],
+      "properties": {
+        "version_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "install_kind": {
+          "enum": [
+            "apk",
+            "split_apks",
+            "xapk"
+          ]
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/selector"
+      },
+      "minProperties": 1
+    },
+    "begin_attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reset_id",
+        "reset_command",
+        "remote_baseline",
+        "initial_assertion",
+        "receipt_fields"
+      ],
+      "properties": {
+        "reset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reset_command": {
+          "$ref": "#/$defs/argv"
+        },
+        "remote_baseline": {
+          "enum": [
+            "verified",
+            "not_applicable"
+          ]
+        },
+        "initial_assertion": {
+          "$ref": "#/$defs/assertion"
+        },
+        "receipt_fields": {
+          "const": [
+            "reset_verified",
+            "target_page_verified",
+            "remote_baseline",
+            "reset_id",
+            "state_hash"
+          ]
+        }
+      }
+    },
+    "execute_turn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verify_action",
+        "observation_seconds",
+        "poll_seconds",
+        "evidence_kinds"
+      ],
+      "properties": {
+        "verify_action": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["action", "selector"],
+                "properties": {
+                  "action": {"enum": ["click", "click_if_present", "double_click", "long_click"]},
+                  "selector": {
+                    "anyOf": [
+                      {"$ref": "#/$defs/ui_selector"},
+                      {"$ref": "#/$defs/selector"}
+                    ]
+                  },
+                  "if_missing": {
+                    "const": "stop"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["action", "key"],
+                "properties": {
+                  "action": {"const": "press"},
+                  "key": {"type": "string", "minLength": 1}
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["action", "selector", "key"],
+                "properties": {
+                  "action": {"const": "press_if_present"},
+                  "selector": {
+                    "anyOf": [
+                      {"$ref": "#/$defs/ui_selector"},
+                      {"$ref": "#/$defs/selector"}
+                    ]
+                  },
+                  "key": {"type": "string", "minLength": 1}
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["action", "seconds"],
+                "properties": {
+                  "action": {"const": "wait"},
+                  "seconds": {"type": "number", "exclusiveMinimum": 0, "maximum": 30}
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "action", "package", "start_x", "start_y", "end_x", "end_y",
+                  "duration_seconds", "screen_width", "screen_height"
+                ],
+                "properties": {
+                  "action": {"const": "swipe"},
+                  "package": {"type": "string", "minLength": 1},
+                  "start_x": {"type": "integer", "minimum": 0},
+                  "start_y": {"type": "integer", "minimum": 0},
+                  "end_x": {"type": "integer", "minimum": 0},
+                  "end_y": {"type": "integer", "minimum": 0},
+                  "duration_seconds": {"type": "number", "exclusiveMinimum": 0, "maximum": 5},
+                  "screen_width": {"type": "integer", "minimum": 1},
+                  "screen_height": {"type": "integer", "minimum": 1}
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "action", "package", "x", "y", "screen_width", "screen_height"
+                ],
+                "properties": {
+                  "action": {"const": "tap"},
+                  "package": {"type": "string", "minLength": 1},
+                  "x": {"type": "integer", "minimum": 0},
+                  "y": {"type": "integer", "minimum": 0},
+                  "screen_width": {"type": "integer", "minimum": 1},
+                  "screen_height": {"type": "integer", "minimum": 1}
+                }
+              }
+            ]
+          }
+        },
+        "input_strategies": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "enum": ["adb_key_events", "masked_phone_suffix"]
+          }
+        },
+        "input_rejection_verdict": {
+          "const": "fail"
+        },
+        "candidate_binding_goal": {
+          "const": true
+        },
+        "candidate_text_goal": {
+          "const": true
+        },
+        "observer_command": {
+          "$ref": "#/$defs/argv"
+        },
+        "observation_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "poll_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "evidence_kinds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "xml",
+              "screenshot",
+              "logcat",
+              "remote_receipt"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "recover_turn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recovery_id",
+        "command",
+        "snapshot_loaded",
+        "remote_reset",
+        "renavigated_from_baseline",
+        "natural_state_preserved",
+        "target_page_assertion",
+        "input_clear_assertion",
+        "dynamic_relocation_required"
+      ],
+      "properties": {
+        "recovery_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "$ref": "#/$defs/argv"
+        },
+        "snapshot_loaded": {
+          "const": false
+        },
+        "remote_reset": {
+          "const": false
+        },
+        "renavigated_from_baseline": {
+          "const": false
+        },
+        "natural_state_preserved": {
+          "const": true
+        },
+        "target_page_assertion": {
+          "$ref": "#/$defs/assertion"
+        },
+        "input_clear_assertion": {
+          "$ref": "#/$defs/assertion"
+        },
+        "dynamic_relocation_required": {
+          "const": true
+        }
+      }
+    },
+    "goal_assertion": {
+      "$ref": "#/$defs/assertion"
+    },
+    "diagnostic_targets": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "selector",
+          "attribute"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "selector": {
+            "$ref": "#/$defs/selector"
+          },
+          "attribute": {
+            "enum": [
+              "text",
+              "hint",
+              "content-desc"
+            ]
+          }
+        }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_control",
+        "negative_control",
+        "version_alignment_verified",
+        "reset_verified",
+        "recovery_verified"
+      ],
+      "properties": {
+        "positive_control": {
+          "type": "string",
+          "minLength": 1
+        },
+        "negative_control": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version_alignment_verified": {
+          "const": true
+        },
+        "reset_verified": {
+          "const": true
+        },
+        "recovery_verified": {
+          "const": true
+        },
+        "artifact_identity_policy": {
+          "const": "installed_apk_set_sha256"
+        },
+        "inspection_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "plan_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "formal_adapter_smoke_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "argv": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "package",
+        "class"
+      ],
+      "properties": {
+        "package": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resource-id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content-desc": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "instance": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique": {
+          "const": true
+        },
+        "ancestor-resource-id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "descendant-text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "anyOf": [
+        {"required": ["resource-id"]},
+        {"required": ["text"]},
+        {"required": ["content-desc"]},
+        {"required": ["hint"]},
+        {"required": ["ancestor-resource-id"]},
+        {"required": ["descendant-text"]},
+        {"required": ["unique"]}
+      ]
+    },
+    "ui_selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package"],
+      "properties": {
+        "package": {"type": "string", "minLength": 1},
+        "class": {"type": "string", "minLength": 1},
+        "resource-id": {"type": "string", "minLength": 1},
+        "text": {"type": "string", "minLength": 1},
+        "content-desc": {"type": "string", "minLength": 1},
+        "enabled": {"type": "boolean"}
+      },
+      "anyOf": [
+        {"required": ["resource-id"]},
+        {"required": ["text"]},
+        {"required": ["content-desc"]}
+      ]
+    },
+    "assertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "targets"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "all",
+            "any"
+          ]
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "selector",
+              "exists"
+            ],
+            "properties": {
+          "selector": {
+            "anyOf": [
+              {"$ref": "#/$defs/ui_selector"},
+              {"$ref": "#/$defs/selector"}
+            ]
+          },
+              "exists": {
+                "type": "boolean"
+              },
+              "attribute": {
+                "enum": ["text", "hint", "content-desc", "text_equals_hint", "text_non_empty"]
+              },
+              "equals": {
+                "oneOf": [
+                  {"type": "string"},
+                  {"const": true}
+                ]
+              }
+            },
+            "dependentRequired": {
+              "attribute": ["equals"],
+              "equals": ["attribute"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

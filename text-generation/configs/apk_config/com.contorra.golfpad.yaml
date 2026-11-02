@@ -1,0 +1,52 @@
+# com.peerspace.app.yaml
+
+app_name: "Golf Pad"
+
+delay_detect:
+    - "START"
+
+navigation_steps:
+  - action: click
+    target: START
+    by: text
+    retry: 3
+
+  - action: click
+    target: Add golfer
+    by: text
+    retry: 3
+    delay: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000014b3"
+    raw_y_hex: "000010e5"
+    delay: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003ce5"
+    raw_y_hex: "00005beb"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006b65"
+    raw_y_hex: "000010c2"
+
+verify_action:
+  - action: click
+    target: Done
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Edit contact"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Enter manually"
+  by: text
+  timeout: 3

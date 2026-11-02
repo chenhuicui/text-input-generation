@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "Rent"
+
+delay_detect:
+    - "Search"
+    - "Home"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002ae6"
+    raw_y_hex: "00000c75"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000197f"
+    raw_y_hex: "0000223d"
+
+verify_disappear:
+  targets:
+    - "Current Location"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Call"
+    - "Email"
+  by: text
+  timeout: 5

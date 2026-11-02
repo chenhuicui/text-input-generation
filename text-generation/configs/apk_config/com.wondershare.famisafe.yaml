@@ -1,0 +1,56 @@
+# com.peerspace.app.yaml
+
+app_name: "FamiSafe"
+
+delay_detect:
+    - "Continue"
+
+navigation_steps:
+  - action: click
+    type: back
+
+  - action: click
+    target: Account
+    by: text
+    retry: 3
+
+  - action: click
+    target: Device Management
+    by: text
+    retry: 3
+
+  - action: click
+    target: Edit
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000073cb"
+    raw_y_hex: "000012a4"
+
+  - action: click
+    target: Disconnect
+    by: text
+    retry: 3
+
+  - action: click
+    target: Connect a New Device
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Name of the target device user"
+  by: text
+
+verify_appear:
+  targets:
+    - "Choose the target device"
+  by: text

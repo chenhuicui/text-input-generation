@@ -1,0 +1,38 @@
+# com.peerspace.app.yaml
+
+app_name: "Shazam"
+
+delay_detect:
+    - "Tap to Shazam"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003f4c"
+    raw_y_hex: "00005a93"
+
+  - action: click
+    target: Search for songs, artists & lyrics
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000317f"
+    raw_y_hex: "0000279e"
+
+verify_disappear:
+  targets:
+    - "Search"
+  by: text
+
+verify_appear:
+  targets:
+    - "LYRICS"
+    - "Play all"
+  by: text
+  mode: any

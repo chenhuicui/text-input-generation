@@ -1,0 +1,58 @@
+# com.peerspace.app.yaml
+
+app_name: "AI Mail Homescreen"
+
+delay_detect:
+  - "Skip"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006eff"
+    raw_y_hex: "00000d44"
+
+  - action: swipe
+    raw_fx_hex: "00001d19"
+    raw_fy_hex: "00002373"
+    raw_tx_hex: "000062b2"
+    raw_ty_hex: "00002373"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006eff"
+    raw_y_hex: "00000d44"
+
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00004332"
+    raw_y_hex: "00004736"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000071ff"
+    raw_y_hex: "0000786c"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007632"
+    raw_y_hex: "0000184a"
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000754b"
+    raw_y_hex: "00000afa"
+
+verify_disappear:
+  targets:
+    - "Would you like to save this as a draft to edit later?"
+    - "Save Draft"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Search Emails"
+  by: text
+  timeout: 3

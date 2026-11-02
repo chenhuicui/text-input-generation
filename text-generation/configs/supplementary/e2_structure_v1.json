@@ -1,0 +1,153 @@
+{
+  "schema_version": "e2-structure-v1-config-1",
+  "protocol_id": "E2-structure-v1",
+  "protocol_status": "formal_ready_explicit_applicability",
+  "formal_run_enabled": false,
+  "applicability": {
+    "revision": "20260922-explicit-app-behavior-scope-v1",
+    "full_registry_size": 152,
+    "formal_denominator_size": 149,
+    "not_applicable_count": 3,
+    "not_applicable_case_ids": [
+      "P031",
+      "P082",
+      "P104"
+    ],
+    "silent_case_removal_prohibited": true,
+    "replacement_oracle_prohibited": true
+  },
+  "representation": {
+    "primary": "extracted",
+    "decision_status": "frozen",
+    "rationale": "The primary causal contrast is feedback organization and evidence. Fixing one representation avoids a representation-by-feedback interaction in the main experiment.",
+    "robustness_check": {
+      "status": "proposed_not_frozen",
+      "representations": [
+        "xml",
+        "vision"
+      ],
+      "sampling": "pre-registered stratified subset",
+      "sample_size": null,
+      "expansion_rule": "Expand only under a separately versioned protocol if the robustness check shows a material representation-by-arm interaction."
+    }
+  },
+  "models": [
+    {
+      "id": "claude-opus-4-6",
+      "gateway_verified": true,
+      "revision_verified": true,
+      "generation_defaults_verified": true,
+      "capacity_verified": true,
+      "fresh_session_isolation_verified": true,
+      "max_prompt_bytes": 65536
+    },
+    {
+      "id": "Doubao-Seed-2.0-pro",
+      "gateway_verified": true,
+      "revision_verified": true,
+      "generation_defaults_verified": true,
+      "capacity_verified": true,
+      "fresh_session_isolation_verified": true,
+      "max_prompt_bytes": 65536
+    },
+    {
+      "id": "gemini-3.1-pro-preview",
+      "gateway_verified": true,
+      "revision_verified": true,
+      "generation_defaults_verified": true,
+      "capacity_verified": true,
+      "fresh_session_isolation_verified": true,
+      "max_prompt_bytes": 65536
+    }
+  ],
+  "arms": {
+    "A": "basic_retry_without_explicit_history",
+    "B": "legacy_feedback",
+    "C": "structured_equivalent_feedback",
+    "D": "structured_equivalent_feedback_plus_traceable_public_app_evidence"
+  },
+  "replicates": 3,
+  "schedule_seed": 20260920,
+  "budgets_including_first_turn": {
+    "valid_pptr": 3,
+    "invalid_bug": 30
+  },
+  "feedback": {
+    "history_limit": 5,
+    "max_candidate_chars": 8000,
+    "max_public_error_chars": 500,
+    "b_c_shared_information_required": true,
+    "d_fallback_to_c_without_verified_evidence": true
+  },
+  "model_request": {
+    "request_fields": [
+      "modelType",
+      "id",
+      "message"
+    ],
+    "id_must_equal": "",
+    "provider_cursor_reuse": false,
+    "explicit_history_only": true,
+    "temperature": null,
+    "seed": null
+  },
+  "attempt": {
+    "independent_attempt_requires_frozen_initial_state": true,
+    "independent_attempt_requires_remote_baseline_receipt_when_applicable": true,
+    "turn_recovery_must_not_load_snapshot": true,
+    "turn_recovery_must_not_reset_remote_state": true,
+    "turn_recovery_preserves_natural_app_state": true,
+    "turn_recovery_requires_current_ui_relocation": true,
+    "turn_recovery_requires_input_clear": true
+  },
+  "verdicts": [
+    "pass",
+    "fail",
+    "unknown",
+    "infrastructure_error"
+  ],
+  "formal_run_gate": {
+    "require_explicit_oracle_or_exclusion_for_all_152_cases": true,
+    "require_all_applicable_cases_behavior_oracle_ready": true,
+    "require_all_applicable_cases_attempt_reset_ready": true,
+    "require_all_applicable_cases_recovery_ready": true,
+    "require_all_binding_reviews_resolved": true,
+    "require_all_models_qualified": true,
+    "require_representation_decision_frozen": true,
+    "require_gateway_fresh_session_isolation_verified": true
+  },
+  "manual_binding_review_cases": [
+    "P033",
+    "P094",
+    "P104",
+    "B012",
+    "B013",
+    "B015",
+    "B033",
+    "B036"
+  ],
+  "runtime": {
+    "api_url": "http://must.lab.help1.com.cn/api/chat/completions",
+    "api_token_env": "MUST_LAB_API_TOKEN",
+    "api_timeout_seconds": 500,
+    "verify_ssl": false,
+    "environment_command": [
+      "/opt/anaconda3/bin/python3",
+      "-m",
+      "text_input_eval.supplementary.structured_android"
+    ],
+    "environment_timeout_seconds": 600,
+    "oracle_manifest": "../../output/e2_structure_v1_20260920/formal_oracles.json",
+    "formal_exclusions": "../../output/e2_structure_v1_20260920/formal_exclusions_recovered.json",
+    "model_preflight_report": "../../output/e2_structure_v1_20260920/model_preflight_20260920.json",
+    "refusal_exact_matches": []
+  },
+  "sources": {
+    "cache_root": "../../tosem_major/apk_info/cache",
+    "page_source_inventory": "../../output/tosem_spec_source_audit_20260908/page_source_inventory.json",
+    "mirror_root": "/Volumes/Extreme Pro/emulator/CD_115page_37bug",
+    "oracle_audit": "/Users/cuichenhui/.codex/worktrees/a237/llm-empirical-study/output/reviewer2_workplan_20260915/02_oracle_audit/oracle_registry.json",
+    "binding_review_resolutions": "../../output/e2_structure_v1_20260920/binding_review_resolutions.json",
+    "bug_evidence": "/Users/cuichenhui/.codex/worktrees/a237/llm-empirical-study/output/reviewer2_workplan_20260915/01_bug_evidence/bug_evidence_registry.json"
+  }
+}

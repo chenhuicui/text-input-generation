@@ -1,0 +1,38 @@
+# com.peerspace.app.yaml
+
+app_name: "Audify Music Player"
+
+delay_detect:
+    - "Albums"
+    - "Calm sounds"
+    - "More"
+
+navigation_steps:
+  - action: click
+    target: More
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000071b2"
+    raw_y_hex: "00000f8d"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00004be5"
+    raw_y_hex: "00002ad8"
+
+verify_action:
+  - action: click
+    target: Done
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Done"
+    - "Tap to change the image"
+    - "Music listened so far"
+  by: text
+  timeout: 3

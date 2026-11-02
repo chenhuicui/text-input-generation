@@ -1,0 +1,31 @@
+# com.peerspace.app.yaml
+
+app_name: "Whoosh"
+
+delay_detect:
+    - "Sign in by phone number"
+
+navigation_steps:
+  - action: click
+    target: "Sign in by phone number"
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Get code
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Phone number"
+    - "Get code"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Please enter the code from the SMS/push notification"
+  by: text
+  timeout: 5

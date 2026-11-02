@@ -1,0 +1,30 @@
+from text_input_eval.validators.base import BaseValidator
+from text_input_eval.validators.registry import register
+
+
+@register
+class Page061Validator(BaseValidator):
+    case_id = "P061"
+    task = "valid_input"
+
+    TARGET_ID = "Search toolbar"
+
+    REQUIRED_IDS = {
+        TARGET_ID,
+    }
+
+    INVALID_VALUES = {
+        "generated_value",
+        "generated-value",
+        "generated value",
+    }
+
+    def validate(self, generated_inputs: dict) -> bool:
+        if not self.contains_all_required_ids(generated_inputs, self.REQUIRED_IDS):
+            return False
+
+        value = str(generated_inputs.get(self.TARGET_ID, "")).strip()
+        if not value:
+            return False
+
+        return value.lower() not in self.INVALID_VALUES

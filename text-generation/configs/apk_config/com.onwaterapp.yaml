@@ -1,0 +1,48 @@
+# com.peerspace.app.yaml
+
+app_name: "onWater Fish"
+
+delay_detect:
+    - "List View"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007118"
+    raw_y_hex: "00000ad8"
+
+  - action: click
+    target: List View
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000bff"
+    raw_y_hex: "00000c30"
+
+verify_action:
+  - action: double_click
+    type: coordinate
+    raw_x_hex: "00000e66"
+    raw_y_hex: "000014a9"
+    delay: 2
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000072e5"
+    raw_y_hex: "000026ad"
+    delay: 2
+
+verify_disappear:
+  targets:
+    - "Search by water, city, or town"
+  by: text
+
+verify_appear:
+  targets:
+    - "Species"
+    - "Overview"
+  by: text
+  mode: any
+

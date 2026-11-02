@@ -1,0 +1,47 @@
+# com.peerspace.app.yaml
+
+app_name: "Michaels"
+
+delay_detect:
+    - "Change"
+    - "MORE"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000072e5"
+    raw_y_hex: "0000777b"
+    delay: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003c4c"
+    raw_y_hex: "00006623"
+
+  - action: click
+    target: Search Stores
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+    delay: 5
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003865"
+    raw_y_hex: "00004a2b"
+
+verify_disappear:
+  targets:
+    - "Use my current location"
+    - "Enter city, state or zip"
+  by: text
+
+verify_appear:
+  targets:
+    - "Store Map"
+    - "Detail"
+  by: text
+

@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "mySugr"
+
+delay_detect:
+    - "Continue"
+
+navigation_steps:
+  - action: click
+    target: Continue
+    by: text
+    retry: 3
+
+  - action: click
+    target: Sign in
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Please enter your email address to get started"
+  by: text
+
+verify_appear:
+  targets:
+    - "Check your email"
+    - "Welcome back!"
+  by: text
+  mode: any

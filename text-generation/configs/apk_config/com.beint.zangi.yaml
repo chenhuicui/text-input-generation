@@ -1,0 +1,41 @@
+# com.peerspace.app.yaml
+
+app_name: "Zangi"
+
+delay_detect:
+  - "Your Private Number"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000072e5"
+    raw_y_hex: "000079c4"
+
+  - action: click
+    target: Your Profile
+    by: text
+    retry: 3
+
+  - action: click
+    target: Change Password
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Continue
+    by: text
+    retry: 3
+
+verify_appear:
+  targets:
+    - "Sign Out"
+    - "(!) You can delete your account from Settings → Privacy → Delete account. This action can't be undone and all data will be lost."
+  by: text
+  timeout: 3
+
+verify_disappear:
+  targets:
+    - "Continue"
+  by: text
+  timeout: 3

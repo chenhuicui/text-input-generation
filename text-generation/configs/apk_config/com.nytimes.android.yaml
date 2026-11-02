@@ -1,0 +1,30 @@
+# com.peerspace.app.yaml
+
+app_name: "NYTimes"
+
+delay_detect:
+    - "Today"
+    - "Play"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007898"
+    raw_y_hex: "000009c5"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000184c"
+    raw_y_hex: "00002532"
+
+verify_disappear:
+  targets:
+    - "Relevance"
+    - "Newest"
+    - "Oldest"
+  by: text
+

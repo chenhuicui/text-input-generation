@@ -1,0 +1,39 @@
+app_name: "Question.AI"
+
+delay_detect:
+  - "Tools"
+
+
+navigation_steps:
+
+  - action: click
+    target: Tools
+    by: text
+    retry: 3
+
+  - action: click
+    target: AI Writing
+    by: text
+    retry: 3
+
+  - action: click
+    target: Essay
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006132"
+    raw_y_hex: "00007849"
+
+verify_appear:
+  targets:
+    - "Stop"
+  by: text
+
+verify_disappear:
+  targets:
+    - "Essay"
+    - "Snap to write"
+  by: text

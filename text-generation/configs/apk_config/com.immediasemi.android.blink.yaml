@@ -1,0 +1,41 @@
+# com.peerspace.app.yaml
+
+app_name: "Blink"
+
+delay_detect:
+    - "Create Account"
+
+navigation_steps:
+  - action: click
+    target: Create Account
+    by: text
+    retry: 3
+
+  - action: click
+    target: NEXT
+    by: text
+    retry: 3
+
+  - action: click
+    target: OK
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "What is your email address?"
+    - "Email"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Password"
+  by: text
+  timeout: 5

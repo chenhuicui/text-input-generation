@@ -1,0 +1,30 @@
+app_name: "Chewy"
+
+delay_detect:
+  - "Search"
+
+navigation_steps:
+  - action: click
+    target: Search
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+    delay: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002d99"
+    raw_y_hex: "00002d21"
+
+verify_appear:
+  targets:
+    - "Filter"
+  by: text
+
+verify_disappear:
+  targets:
+    - "Recent Searches"
+  by: text

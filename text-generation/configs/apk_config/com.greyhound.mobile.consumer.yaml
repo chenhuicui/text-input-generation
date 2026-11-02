@@ -1,0 +1,26 @@
+# com.peerspace.app.yaml
+
+app_name: "GreyHound"
+
+delay_detect:
+  - "Select city"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000017ff"
+    raw_y_hex: "00001f25"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001719"
+    raw_y_hex: "0000184a"
+
+verify_appear:
+  targets:
+    - "Select city"
+  by: text

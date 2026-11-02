@@ -1,0 +1,42 @@
+# com.peerspace.app.yaml
+
+app_name: "Okta Verify"
+
+delay_detect:
+    - "Add account"
+
+navigation_steps:
+  - action: click
+    target: Add account
+    by: text
+    retry: 3
+
+
+  - action: click
+    target: Other
+    by: text
+    retry: 3
+
+  - action: click
+    target: Enter Key Manually
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Add Account
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Enter key"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Account Added"
+    - "Organization"
+  by: text
+  timeout: 5

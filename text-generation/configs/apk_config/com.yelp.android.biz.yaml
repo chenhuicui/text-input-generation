@@ -1,0 +1,35 @@
+app_name: "Yelp Biz"
+
+delay_detect:
+  - "Add your first location"
+
+navigation_steps:
+  - action: click
+    target: Go to account settings
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: SAVE
+    by: text
+    retry: 3
+
+  - action: click
+    target: OK
+    by: text
+    retry: 3
+
+verify_appear:
+  targets:
+    - "Add your first location"
+  by: text
+  match_mode: any
+  timeout: 5
+
+verify_disappear:
+  targets:
+    - "SAVE"
+  by: text
+  match_mode: any
+  timeout: 5

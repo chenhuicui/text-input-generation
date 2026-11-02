@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "The Knot"
+
+delay_detect:
+    - "+ Add wedding date"
+
+navigation_steps:
+  - action: click
+    target: "+ Add wedding date"
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000063e5"
+    raw_y_hex: "000016cf"
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "No photos yet"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Saved!"
+  by: text
+  timeout: 3

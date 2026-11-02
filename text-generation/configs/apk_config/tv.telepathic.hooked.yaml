@@ -1,0 +1,45 @@
+# com.peerspace.app.yaml
+
+app_name: "Hooked"
+
+delay_detect:
+    - "Find movie or story"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006998"
+    raw_y_hex: "00007a70"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000079cb"
+    raw_y_hex: "00000ba6"
+
+  - action: click
+    target: Sign Up / Login
+    by: text
+    retry: 3
+
+  - action: click
+    target: Email
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007118"
+    raw_y_hex: "0000414c"
+
+verify_disappear:
+  targets:
+    - "Enter your email"
+  by: text
+
+verify_appear:
+  targets:
+    - "Create a password"
+    - "Enter your password"
+  by: text
+  mode: any

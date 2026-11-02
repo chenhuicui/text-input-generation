@@ -1,0 +1,24 @@
+# com.peerspace.app.yaml
+
+app_name: "Nothing Bundt Cakes"
+
+delay_detect:
+    - "Finish your account"
+
+navigation_steps:
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Finish your account"
+  by: text
+
+verify_appear:
+  targets:
+    - ""
+  by: text

@@ -1,0 +1,31 @@
+# com.peerspace.app.yaml
+
+app_name: "Podcast Go"
+
+delay_detect:
+    - "Home"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006bff"
+    raw_y_hex: "00000b62"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003819"
+    raw_y_hex: "0000168a"
+
+verify_disappear:
+  targets:
+    - "Search"
+  by: text
+
+verify_appear:
+  targets:
+    - "SUBSCRIBE"
+  by: text

@@ -1,0 +1,36 @@
+# com.peerspace.app.yaml
+
+app_name: "TeamReach"
+
+delay_detect:
+    - "Group Code"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003f99"
+    raw_y_hex: "00001918"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00004032"
+    raw_y_hex: "00002464"
+
+verify_action:
+  - action: click
+    target: Create
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Group Code must be at least 8 characters long."
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Congratulations!"
+    - "Continue"
+  by: text
+  timeout: 5

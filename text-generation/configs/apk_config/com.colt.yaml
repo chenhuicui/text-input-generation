@@ -1,0 +1,38 @@
+# com.peerspace.app.yaml
+
+app_name: "Galatea"
+
+delay_detect:
+    - "Home"
+    - "Library"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000077ff"
+    raw_y_hex: "000014a9"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001766"
+    raw_y_hex: "0000321a"
+
+verify_disappear:
+  targets:
+    - "Books"
+    - "Audiobooks"
+    - "List"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "READ NOW"
+    - "Share"
+    - "Save"
+  by: text
+  timeout: 5

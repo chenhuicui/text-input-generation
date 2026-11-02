@@ -1,0 +1,38 @@
+# com.peerspace.app.yaml
+
+app_name: "Zenni"
+
+delay_detect:
+    - "Home"
+    - "Categories"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002e4c"
+    raw_y_hex: "00004714"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: double_click
+    type: coordinate
+    raw_x_hex: "000016cc"
+    raw_y_hex: "00002f25"
+    delay: 5
+
+verify_disappear:
+  targets:
+    - "Home"
+    - "Categories"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Show Dimensions"
+    - "Add To Cart"
+  by: text
+  timeout: 5
+  mode: any

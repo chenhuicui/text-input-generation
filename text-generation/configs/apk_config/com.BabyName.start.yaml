@@ -1,0 +1,44 @@
+# com.peerspace.app.yaml
+
+app_name: "Baby Name Together"
+
+delay_detect:
+    - "2422"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000006e6"
+    raw_y_hex: "00000b1d"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000377f"
+    raw_y_hex: "00000ab6"
+
+
+verify_action:
+  - action: click
+    target: APPLY FILTERS
+    by: text
+    retry: 3
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000784b"
+    raw_y_hex: "00000afa"
+
+verify_disappear:
+  targets:
+    - "Gender"
+    - "All"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Random"
+  by: text
+  mode: any
+  timeout: 3
+
+

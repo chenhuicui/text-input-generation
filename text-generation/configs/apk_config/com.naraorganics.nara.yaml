@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "Nara Baby"
+
+delay_detect:
+    - "Get Started"
+
+navigation_steps:
+  - action: click
+    target: Get Started
+    by: text
+    retry: 3
+
+  - action: click
+    target: I'm new to Nara
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Create Account
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Create Account"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Tell us about your baby"
+  by: text
+  timeout: 5

@@ -1,0 +1,30 @@
+# com.peerspace.app.yaml
+
+app_name: "Kroger"
+
+delay_detect:
+  - "Not Now"
+
+navigation_steps:
+  - action: click
+    target: Not Now
+    by: text
+    retry: 3
+
+  - action: click
+    target: Enter Postal Code
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007632"
+    raw_y_hex: "000018b1"
+
+verify_disappear:
+  targets:
+    - "Postal Code"
+    - "Enter Postal Code"
+  by: text
+  timeout: 15

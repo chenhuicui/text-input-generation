@@ -1,0 +1,48 @@
+# com.peerspace.app.yaml
+
+app_name: "Shop"
+
+delay_detect:
+    - "Follow"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00005018"
+    raw_y_hex: "000078d3"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007418"
+    raw_y_hex: "00000ba6"
+
+  - action: click
+    target: Add order manually
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000050b2"
+    raw_y_hex: "000077e2"
+
+  - action: double_click
+    type: coordinate
+    raw_x_hex: "00001f7f"
+    raw_y_hex: "0000450f"
+
+  - action: click
+    target: Add order
+    by: text
+    retry: 3
+
+verify_appear:
+  targets:
+    - "Track all your orders here"
+    - "Sign in to connect your account and Shop will automatically track your orders."
+    - "Package added"
+    - "View"
+  by: text
+  mode: any
+  timeout: 2

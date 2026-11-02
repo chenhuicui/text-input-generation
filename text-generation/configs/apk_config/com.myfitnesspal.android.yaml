@@ -1,0 +1,45 @@
+# com.peerspace.app.yaml
+
+app_name: "MyFitnessPal"
+
+delay_detect:
+    - "More"
+
+navigation_steps:
+  - action: click
+    target: More
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000a7f"
+    raw_y_hex: "00000c75"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000754b"
+    raw_y_hex: "00000cff"
+
+  - action: click
+    target: Change Password
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: CHANGE PASSWORD
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "CHANGE PASSWORD"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Edit Profile"
+  by: text
+  timeout: 3

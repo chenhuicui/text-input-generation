@@ -1,0 +1,37 @@
+app_name: "Pocket FM"
+
+delay_detect:
+  - "Home"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006c98"
+    raw_y_hex: "00000ad8"
+
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+    delay: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003699"
+    raw_y_hex: "00001bc9"
+
+verify_appear:
+  targets:
+    - "Library"
+    - 'Plays'
+  by: text
+
+verify_disappear:
+  targets:
+    - "Audio Series"
+  by: text
+

@@ -1,0 +1,29 @@
+# com.peerspace.app.yaml
+
+app_name: "Angi"
+
+delay_detect:
+    - "Additions & Remodels"
+    - "View all"
+
+navigation_steps:
+  - action: click
+    target: Additions & Remodels
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "What's your project's ZIP Code?"
+  by: text
+
+verify_appear:
+  targets:
+    - "What type of remodeling do you need done?"
+  by: text

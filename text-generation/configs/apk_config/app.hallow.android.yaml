@@ -1,0 +1,47 @@
+# com.peerspace.app.yaml
+
+app_name: "Hallow"
+
+delay_detect:
+    - "Home"
+
+navigation_steps:
+  - action: click
+    target: Me
+    by: text
+    retry: 3
+
+  - action: click
+    target: Journal
+    by: text
+    retry: 3
+
+  - action: click
+    target: Reflections
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000078e5"
+    raw_y_hex: "00000afa"
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Save"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Reflections"
+    - "Me"
+  by: text
+  timeout: 3
+

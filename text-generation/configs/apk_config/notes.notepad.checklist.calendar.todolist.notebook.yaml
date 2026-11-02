@@ -1,0 +1,72 @@
+# com.peerspace.app.yaml
+
+app_name: "Notein"
+
+delay_detect:
+    - "All"
+
+navigation_steps:
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000039e5"
+    raw_y_hex: "00001faf"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000073cb"
+    raw_y_hex: "00000ab6"
+
+  - action: click
+    target: Delete
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007165"
+    raw_y_hex: "0000686c"
+    delay: 4
+
+  - action: click
+    target: TXT
+    by: text
+    retry: 3
+
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007765"
+    raw_y_hex: "00007ad7"
+    delay: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000a7f"
+    raw_y_hex: "00000a71"
+    delay: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000a7f"
+    raw_y_hex: "00000a71"
+    delay: 3
+
+  - action: long_click
+    type: coordinate
+    raw_x_hex: "000039e5"
+    raw_y_hex: "00001faf"
+
+verify_disappear:
+  targets:
+    - "All"
+    - "Personal"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "1 Selected"
+  by: text
+  timeout: 5

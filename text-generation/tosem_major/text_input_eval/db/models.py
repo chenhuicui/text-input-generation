@@ -1,0 +1,1 @@
+TABLE_LLM_TEXT_GENERATION = "t_llm_text_generation"

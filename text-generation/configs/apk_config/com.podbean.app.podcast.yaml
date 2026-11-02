@@ -1,0 +1,49 @@
+# com.peerspace.app.yaml
+
+app_name: "Podbean"
+
+delay_detect:
+    - "Discover"
+    - "Following"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003f99"
+    raw_y_hex: "00007a2b"
+
+  - action: click
+    target: Recording
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003d7f"
+    raw_y_hex: "00005623"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003d7f"
+    raw_y_hex: "00005623"
+
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Episode Title"
+  by: text
+
+verify_appear:
+  targets:
+    - "My Recording"
+  by: text

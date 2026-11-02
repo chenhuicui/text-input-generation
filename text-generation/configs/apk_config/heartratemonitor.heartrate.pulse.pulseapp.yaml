@@ -1,0 +1,36 @@
+# com.peerspace.app.yaml
+
+app_name: "Heart Rate"
+
+delay_detect:
+    - "HOME"
+    - "Weight & BMI"
+
+navigation_steps:
+
+  - action: click
+    target: "Weight & BMI"
+    by: text
+    retry: 3
+
+  - action: click
+    target: Add
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Save"
+  by: text
+
+verify_appear:
+  targets:
+    - "Result"
+    - "Exclusive Advice"
+  by: text

@@ -1,0 +1,14 @@
+app_name: "Alli360"
+
+navigation_steps:
+
+
+verify_action:
+  - action: click
+    type: text
+    target: Connect
+
+verify_disappear:
+  targets:
+    - "Enter the code received in the Kids360: Parental Control app"
+  by: text

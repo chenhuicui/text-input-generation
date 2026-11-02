@@ -1,0 +1,48 @@
+# com.peerspace.app.yaml
+
+app_name: "FramMe"
+
+delay_detect:
+    - "Get Start"
+
+navigation_steps:
+  - action: click
+    target: Get Start
+    by: text
+    retry: 3
+
+  - action: click
+    target: Skip
+    by: text
+    retry: 3
+
+  - action: click
+    target: Featured
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007932"
+    raw_y_hex: "0000116f"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002066"
+    raw_y_hex: "0000284a"
+
+verify_disappear:
+  targets:
+    - "Cancel"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Use"
+  by: text
+  timeout: 5

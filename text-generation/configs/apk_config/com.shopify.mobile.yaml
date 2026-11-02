@@ -1,0 +1,36 @@
+# com.peerspace.app.yaml
+
+app_name: "Shopify"
+
+delay_detect:
+    - "Get ready to sell"
+
+navigation_steps:
+  - action: click
+    target: Add your first product
+    by: text
+    retry: 3
+
+  - action: click
+    target: $0.00
+    by: text
+    retry: 3
+    delay: 5
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000077b2"
+    raw_y_hex: "00000b84"
+
+verify_disappear:
+  targets:
+    - "Compare-at price"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Add description"
+  by: text
+  timeout: 3

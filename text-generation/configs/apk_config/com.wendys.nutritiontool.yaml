@@ -1,0 +1,21 @@
+app_name: "Wendy's"
+
+delay_detect:
+    - "Log In/Sign Up"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "000040cc"
+    raw_y_hex: "00005c3b"
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003dff"
+    raw_y_hex: "00004f6a"
+
+verify_disappear:
+  targets:
+    - "OR"
+  by: text

@@ -1,0 +1,33 @@
+# com.peerspace.app.yaml
+
+app_name: "JobStack for Work"
+
+delay_detect:
+    - "Log in"
+
+navigation_steps:
+  - action: click
+    target: Log in
+    by: text
+    retry: 3
+
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00004332"
+    raw_y_hex: "000038f6"
+
+  - action: click
+    target: Log in
+    by: text
+    retry: 3
+    timeout: 5
+
+verify_disappear:
+  targets:
+    - "Log in to your account"
+    - "Phone number*"
+    - "Password*"
+  by: text
+  timeout: 5

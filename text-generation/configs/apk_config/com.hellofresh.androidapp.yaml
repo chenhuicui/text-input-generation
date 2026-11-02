@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "HelloFresh"
+
+delay_detect:
+    - "Build your plan"
+
+navigation_steps:
+  - action: click
+    target: Build your plan
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0"
+    raw_y_hex: "0"
+    delay: 10
+
+
+verify_action:
+  - action: click
+    target: Continue
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Enter zip code"
+  by: text
+
+verify_appear:
+  targets:
+    - "What kind of meals do you like?"
+  by: text

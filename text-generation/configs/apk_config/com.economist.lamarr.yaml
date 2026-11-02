@@ -1,0 +1,32 @@
+app_name: "Economist"
+
+delay_detect:
+    - "Maybe later"
+
+navigation_steps:
+  - action: click
+    target: Maybe later
+    by: text
+    retry: 3
+
+  - action: click
+    target: Menu
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+    delay: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "2f66"
+    raw_y_hex: "2d21"
+    delay: 5
+
+verify_disappear:
+  targets:
+    - "Settings"
+  by: text
+  match_mode: all

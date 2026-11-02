@@ -1,0 +1,29 @@
+app_name: "MuseScore"
+
+navigation_steps:
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001ee6"
+    raw_y_hex: "00002beb"
+
+verify_disappear:
+  targets:
+    - "Scores"
+    - "Courses"
+    - "Songbooks"
+    - "My library"
+  by: text
+  match_mode: all
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Oops!"
+  by: text
+  match_mode: all
+  timeout: 5

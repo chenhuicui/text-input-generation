@@ -1,0 +1,23 @@
+# com.peerspace.app.yaml
+
+app_name: "Sunrun"
+
+delay_detect:
+    - "Get Started"
+
+navigation_steps:
+  - action: click
+    target: Get Started
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_appear:
+  targets:
+    - "Verification"
+  by: text

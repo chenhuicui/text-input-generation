@@ -1,0 +1,30 @@
+# com.peerspace.app.yaml
+
+app_name: "HomeToGo"
+
+delay_detect:
+    - "Where are you going?"
+
+navigation_steps:
+
+  - action: click
+    target: Where are you going?
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000154c"
+    raw_y_hex: "00001c0e"
+
+verify_disappear:
+  targets:
+    - "Search destinations"
+  by: text
+
+verify_appear:
+  targets:
+    - "Exact dates"
+    - "I'm flexible"
+  by: text

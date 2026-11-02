@@ -1,0 +1,30 @@
+prompt_templates:
+  GloP: >
+    This is an app named {app_name}, and there are {input_count} text-input components on its {activity} page, including {component_types}.
+
+  ComP: >
+    For the {component_order} {component_type} (resource-id: {resource_id}), the hint text is "{hint_text}", and currently displays "{current_text}".
+
+  AdjP: >
+    The {direction} adjacent label of {component_id} is "{text}".
+
+  ResP: >
+    Please generate valid text input for these components:
+
+    Response format MUST BE:
+    ```json
+    {example_json}
+    ```
+
+  GuiP: >
+    Explain your value selection strategy step-by-step.
+
+  Retry: >
+    Test case parsing failed. Please regenerate with strict format:
+    MUST use the following EXACT JSON format:
+    ```json
+    {example_json}
+    ```
+    Requirements:
+    1. Keys must match resource ids
+    2. Include all {component_count} components

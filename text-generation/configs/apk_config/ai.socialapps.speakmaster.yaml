@@ -1,0 +1,25 @@
+app_name: "PolyBuzz"
+
+delay_detect:
+  - "Explore"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000454c"
+    raw_y_hex: "000012a4"
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001633"
+    raw_y_hex: "0000123d"
+
+verify_appear:
+  targets:
+    - "All"
+    - "OC"
+  by: text

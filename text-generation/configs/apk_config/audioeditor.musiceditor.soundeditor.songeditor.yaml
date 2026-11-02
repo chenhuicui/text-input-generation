@@ -1,0 +1,25 @@
+app_name: "Audio Editor"
+
+navigation_steps:
+  - action: click
+    type: text
+    target: Trim
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000065ff"
+    raw_y_hex: "00000b1d"
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "Search Audio"
+  by: text
+
+verify_appear:
+  targets:
+    - "Search Audio"
+  by: text

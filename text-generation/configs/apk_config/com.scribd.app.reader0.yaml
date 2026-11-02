@@ -1,0 +1,39 @@
+# com.peerspace.app.yaml
+
+app_name: "Everand"
+
+delay_detect:
+    - "Discover"
+
+navigation_steps:
+  - action: click
+    target: Discover
+    by: text
+    retry: 3
+
+  - action: click
+    target: Title, author, genre, topic
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002232"
+    raw_y_hex: "00002b3f"
+    delay: 5
+
+verify_disappear:
+  targets:
+    - "Everything"
+  by: text
+
+verify_appear:
+  targets:
+    - "Continue"
+    - "Ebooks"
+  by: text
+  mode: any

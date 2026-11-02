@@ -1,0 +1,31 @@
+# com.peerspace.app.yaml
+
+app_name: "Zillow"
+
+delay_detect:
+    - "Search"
+    - "Updates"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000999"
+    raw_y_hex: "00000b3f"
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "For sale"
+    - "For rent"
+    - "Sold"
+  by: text
+
+verify_appear:
+  targets:
+    - "Add another location"
+    - "Search"
+    - "Updates"
+  by: text

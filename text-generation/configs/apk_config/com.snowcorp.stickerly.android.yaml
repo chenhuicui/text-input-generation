@@ -1,0 +1,30 @@
+# com.peerspace.app.yaml
+
+app_name: "Sticker.ly"
+
+delay_detect:
+    - "Search"
+
+navigation_steps:
+  - action: click
+    target: Search
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "Trending Searches"
+  by: text
+
+verify_appear:
+  targets:
+    - "Packs"
+    - "Stickers"
+    - "Accounts"
+    - "Sort"
+    - "Add"
+  by: text

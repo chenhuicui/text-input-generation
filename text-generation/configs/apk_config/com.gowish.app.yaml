@@ -1,0 +1,50 @@
+# com.peerspace.app.yaml
+
+app_name: "GoWish"
+
+delay_detect:
+    - "Activity"
+    - "Friends"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00003eff"
+    raw_y_hex: "00007713"
+    delay: 5
+
+  - action: click
+    target: or create manually
+    by: text
+    retry: 3
+
+#  - action: swipe
+#    raw_fx_hex: "00004465"
+#    raw_fy_hex: "0000568a"
+#    raw_tx_hex: "00004465"
+#    raw_ty_hex: "0000307f"
+#
+#  - action: swipe
+#    raw_fx_hex: "00004465"
+#    raw_fy_hex: "0000307f"
+#    raw_tx_hex: "00004465"
+#    raw_ty_hex: "0000568a"
+
+verify_action:
+  - action: click
+    target: ADD WISH
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "ADD WISH"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Activity"
+    - "Friends"
+  by: text
+  timeout: 3

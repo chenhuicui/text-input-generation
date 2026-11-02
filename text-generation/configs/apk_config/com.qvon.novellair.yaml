@@ -1,0 +1,34 @@
+# com.peerspace.app.yaml
+
+app_name: "Novellair"
+
+delay_detect:
+    - "Discover"
+    - "Search"
+
+navigation_steps:
+  - action: click
+    target: Search
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006d7f"
+    raw_y_hex: "00004b61"
+
+verify_disappear:
+  targets:
+    - "Cancel"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Read"
+  by: text
+  timeout: 5

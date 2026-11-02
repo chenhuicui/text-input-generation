@@ -1,0 +1,31 @@
+{
+  "protocol_version": "supplementary-e1-e2-v1",
+  "cache_root": "../../tosem_major/apk_info/cache",
+  "models": [
+    {"id": "claude-opus-4-6", "max_prompt_bytes": 200000, "gateway_verified": false},
+    {"id": "gpt-5.4-2026-03-05", "max_prompt_bytes": 200000, "gateway_verified": false},
+    {"id": "mistralai/mistral-large-2512", "max_prompt_bytes": 200000, "gateway_verified": false}
+  ],
+  "experiments": ["E1", "E2"],
+  "replicates": 3,
+  "schedule_seed": 20260908,
+  "endpoint": "behavior",
+  "oracle_manifest": null,
+  "oracle_command": null,
+  "oracle_timeout": 180,
+  "api_url": "http://must.lab.help1.com.cn/api/chat/completions",
+  "api_timeout": 500,
+  "case_ids": [],
+  "refusal_exact_matches": [],
+  "e1": {
+    "representations": ["extracted", "xml"],
+    "conditions": ["original", "id_rename", "irrelevant_nodes"],
+    "noise_nodes": 20
+  },
+  "e2": {
+    "budgets": {"valid_pptr": 3, "invalid_bug": 30},
+    "history_limit": 5,
+    "max_candidate_chars": 8000,
+    "max_diagnostic_chars": 1000
+  }
+}

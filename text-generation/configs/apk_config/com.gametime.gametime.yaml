@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "Gametime"
+
+delay_detect:
+    - "Team, performer or venue"
+
+navigation_steps:
+  - action: click
+    target: Team, performer or venue
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001ab2"
+    raw_y_hex: "00001c52"
+
+verify_disappear:
+  targets:
+    - "Teams Near You"
+  by: text
+
+verify_appear:
+  targets:
+    - "Price"
+    - "No Scheduled Events"
+    - "GT Picks"
+  by: text
+  mode: any
+  timeout: 5

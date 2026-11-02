@@ -1,0 +1,319 @@
+-- ============================================================
+-- Final simplified field list after your latest revision
+-- ============================================================
+--
+-- id:
+--   Purpose:
+--     Primary key of each generated text record.
+--   Necessity:
+--     Required.
+--   Values:
+--     Auto-increment BIGINT.
+--
+-- experiment:
+--   Purpose:
+--     Identifies which experiment this record belongs to.
+--   Necessity:
+--     Required.
+--   Values:
+--     rq1_valid
+--     rq1_invalid
+--     rq2_valid_feedback
+--     rq2_invalid_feedback
+--     ablation_prompt
+--     ablation_multi_component
+--
+-- case_id:
+--   Purpose:
+--     Identifies the target page or bug case.
+--     Used to select the corresponding validator.
+--   Necessity:
+--     Required.
+--   Values:
+--     P001 ... P115
+--     B001 ... B037
+--
+-- task:
+--   Purpose:
+--     Identifies the evaluation task type.
+--   Necessity:
+--     Required.
+--   Values:
+--     valid_pptr
+--     invalid_bug
+--
+-- model:
+--   Purpose:
+--     Records the model used to generate the text.
+--   Necessity:
+--     Required.
+--   Values:
+--     gemini-3.1-pro-preview
+--     claude-opus-4-6-thinking
+--     grok-4.20-0309-reasoning
+--     gpt-5.4-2026-03-05
+--     muse-spark
+--     Doubao-Seed-2.0-pro
+--     qwen3.5-397b-a17b
+--     ernie-5.0-0110
+--     kimi-k2.5-thinking
+--     mimo-v2-pro
+--     mistral-large-3
+--     deepseek-v3.2-thinking
+--
+-- prompt_setting:
+--   Purpose:
+--     Records which UI-context representation is used.
+--   Necessity:
+--     Required.
+--   Values:
+--     extracted
+--     xml
+--     vision
+--
+-- prompt_variant:
+--   Purpose:
+--     Records the prompt variant, mainly for prompt ablation.
+--     For normal RQ1/RQ2 experiments, use full.
+--   Necessity:
+--     Required.
+--   Values:
+--     full
+--     no_global
+--     no_component
+--     no_adjacent
+--     no_guiding
+--     minimal
+--     xml
+--     vision
+--
+-- feedback_mode:
+--   Purpose:
+--     Indicates whether this record belongs to a feedback-enhanced setting.
+--   Necessity:
+--     Required.
+--   Values:
+--     none
+--     feedback
+--
+-- attempt_id:
+--   Purpose:
+--     Records the attempt index for valid page-pass-through generation.
+--   Necessity:
+--     Required.
+--   Values:
+--     valid_pptr:
+--       1
+--       2
+--       3
+--     invalid_bug:
+--       -1
+--
+-- invalid_index:
+--   Purpose:
+--     Records the invalid input index among the 30 generated invalid inputs.
+--     This replaces round_id/candidate_id/global_candidate_id.
+--   Necessity:
+--     Required.
+--   Values:
+--     valid_pptr:
+--       -1
+--     invalid_bug:
+--       1 ... 30
+--
+-- session_ids_json:
+--   Purpose:
+--     Stores all session ids involved in this generation process.
+--     Used later to compute context/token cost.
+--   Necessity:
+--     Required or strongly recommended.
+--   Values:
+--     JSON array:
+--       ["sid_001"]
+--       ["sid_001", "sid_002"]
+--
+-- raw_response:
+--   Purpose:
+--     Stores the raw LLM response.
+--   Necessity:
+--     Required.
+--   Values:
+--     LONGTEXT.
+--
+-- parsed_inputs_json:
+--   Purpose:
+--     Stores parsed generated text as a resource-id to value JSON object.
+--     This is the direct input to the validator.
+--   Necessity:
+--     Required if parse_success is TRUE.
+--   Values:
+--     JSON object:
+--       {
+--         "ai.chat.gpt.bot:id/inputEditText": "generated_value"
+--       }
+--     NULL if parse failed.
+--
+-- parse_success:
+--   Purpose:
+--     Indicates whether raw_response was successfully parsed into parsed_inputs_json.
+--   Necessity:
+--     Required.
+--   Values:
+--     TRUE
+--     FALSE
+--
+-- parse_error:
+--   Purpose:
+--     Stores parsing error message.
+--   Necessity:
+--     Required when parse_success is FALSE.
+--     NULL otherwise.
+--   Values:
+--     TEXT
+--     NULL
+--
+-- placeholder_tag:
+--   Purpose:
+--     Marks whether the generated text literally contains the placeholder string generated_value.
+--   Necessity:
+--     Required.
+--   Values:
+--     0:
+--       parsed/generated text does not contain "generated_value"
+--     1:
+--       parsed/generated text contains "generated_value"
+--
+-- eval_success:
+--   Purpose:
+--     Stores evaluation result as boolean.
+--     For valid_pptr, TRUE means page pass-through.
+--     For invalid_bug, TRUE means bug revealed.
+--   Necessity:
+--     Required after evaluation.
+--     NULL before evaluation.
+--   Values:
+--     TRUE
+--     FALSE
+--     NULL
+--
+-- ============================================================
+-- Final fields to keep
+-- ============================================================
+--
+-- id
+-- experiment
+-- case_id
+-- task
+-- model
+-- prompt_setting
+-- prompt_variant
+-- feedback_mode
+-- attempt_id
+-- invalid_index
+-- session_ids_json
+-- raw_response
+-- parsed_inputs_json
+-- parse_success
+-- parse_error
+-- placeholder_tag
+-- eval_success
+--
+
+
+CREATE TABLE t_llm_text_generation (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'Primary key of each generated text record',
+
+    experiment VARCHAR(64) NOT NULL COMMENT 'rq1_valid/rq1_invalid/rq2_valid_feedback/rq2_invalid_feedback/ablation_prompt/ablation_multi_component',
+
+    case_id VARCHAR(64) NOT NULL COMMENT 'Target page or bug case ID, e.g., P001...P115 or B001...B037',
+
+    task VARCHAR(32) NOT NULL COMMENT 'valid_pptr/invalid_bug',
+
+    model VARCHAR(128) NOT NULL COMMENT 'Model ID used for generation',
+
+    prompt_setting VARCHAR(32) NOT NULL COMMENT 'extracted/xml/vision',
+
+    prompt_variant VARCHAR(64) NOT NULL DEFAULT 'full' COMMENT 'full/no_global/no_component/no_adjacent/no_guiding/minimal/xml/vision',
+
+    feedback_mode VARCHAR(32) NOT NULL DEFAULT 'none' COMMENT 'none/feedback',
+
+    attempt_id INT NOT NULL DEFAULT -1 COMMENT 'valid_pptr: 1..3; invalid_bug: -1',
+
+    invalid_index INT NOT NULL DEFAULT -1 COMMENT 'invalid_bug: 1..30; valid_pptr: -1',
+
+    session_ids_json JSON DEFAULT NULL COMMENT 'All session IDs involved in this generation, e.g., ["sid_001","sid_002"]',
+
+    raw_response LONGTEXT NOT NULL COMMENT 'Raw LLM response',
+
+    parsed_inputs_json JSON DEFAULT NULL COMMENT 'Parsed resource-id to generated text JSON object',
+
+    parse_success BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'TRUE if raw_response was successfully parsed into parsed_inputs_json',
+
+    parse_error TEXT DEFAULT NULL COMMENT 'Parsing error message when parse_success is FALSE',
+
+    placeholder_tag TINYINT NOT NULL DEFAULT 0 COMMENT '1 if generated text contains literal string generated_value; otherwise 0',
+
+    eval_success BOOLEAN DEFAULT NULL COMMENT 'valid_pptr: TRUE means pass-through; invalid_bug: TRUE means bug revealed; NULL means not evaluated yet',
+
+    CHECK (experiment IN (
+        'rq1_valid',
+        'rq1_invalid',
+        'rq2_valid_feedback',
+        'rq2_invalid_feedback',
+        'ablation_prompt',
+        'ablation_multi_component'
+    )),
+
+    CHECK (task IN (
+        'valid_pptr',
+        'invalid_bug'
+    )),
+
+    CHECK (prompt_setting IN (
+        'extracted',
+        'xml',
+        'vision'
+    )),
+
+    CHECK (prompt_variant IN (
+        'full',
+        'no_global',
+        'no_component',
+        'no_adjacent',
+        'no_guiding',
+        'minimal',
+        'xml',
+        'vision'
+    )),
+
+    CHECK (feedback_mode IN (
+        'none',
+        'feedback'
+    )),
+
+    CHECK (attempt_id = -1 OR attempt_id BETWEEN 1 AND 3),
+
+    CHECK (invalid_index = -1 OR invalid_index BETWEEN 1 AND 30),
+
+    CHECK (placeholder_tag IN (0, 1)),
+
+    INDEX idx_exp_case (experiment, case_id),
+
+    INDEX idx_model_setting (model, prompt_setting),
+
+    INDEX idx_prompt_variant (prompt_variant),
+
+    INDEX idx_feedback (feedback_mode, attempt_id, invalid_index),
+
+    INDEX idx_parse_success (parse_success),
+
+    INDEX idx_eval_success (eval_success),
+
+    INDEX idx_case_model_setting (
+        case_id,
+        model,
+        prompt_setting,
+        prompt_variant,
+        feedback_mode
+    )
+) COMMENT='LLM text generation and evaluation records';

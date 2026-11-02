@@ -1,0 +1,60 @@
+app_name: "FLY PDF"
+
+delay_detect:
+    - "Next"
+
+navigation_steps:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006f4b"
+    raw_y_hex: "000065bb"
+
+  - action: click
+    target: Image to PDF
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000041b2"
+    raw_y_hex: "0000186c"
+
+  - action: click
+    target: import(1)
+    by: text
+    retry: 3
+
+  - action: click
+    target: DONE
+    by: text
+    retry: 3
+
+  - action: click
+    target: Continue
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00004299"
+    raw_y_hex: "000049c4"
+
+verify_disappear:
+  targets:
+    - "Convert to PDF"
+  by: text
+  match_mode: all
+
+verify_appear:
+  targets:
+    - "Open PDF"
+    - "Share File"
+    - "PDF is Ready"
+  by: text
+  match_mode: all

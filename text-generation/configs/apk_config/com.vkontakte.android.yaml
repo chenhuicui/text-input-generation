@@ -1,0 +1,36 @@
+# com.peerspace.app.yaml
+
+app_name: "VK"
+
+delay_detect:
+  - "Sign in to VK"
+
+navigation_steps:
+
+  - action: click
+    target: Sign up
+    by: text
+    retry: 3
+
+  - action: click
+    type: back
+
+verify_action:
+  - action: click
+    target: Continue
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Your phone number will be used for signing in to your account"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Confirm Number"
+    - "Automatic phone number confirmation"
+  by: text
+  mode: any
+  timeout: 5

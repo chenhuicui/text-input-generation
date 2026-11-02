@@ -1,0 +1,38 @@
+# com.peerspace.app.yaml
+
+app_name: "MX Player"
+
+delay_detect:
+    - "Me"
+
+navigation_steps:
+  - action: click
+    target: Me
+    by: text
+    retry: 3
+
+  - action: click
+    target: Video Playlists
+    by: text
+    retry: 3
+
+  - action: click
+    target: Create New Playlist
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Create
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Create"
+  by: text
+
+verify_appear:
+  targets:
+    - "Add Videos"
+  by: text

@@ -1,0 +1,43 @@
+# com.peerspace.app.yaml
+
+app_name: "NovelFlow"
+
+delay_detect:
+  - "Library"
+  - "Discover"
+  - "Rewards"
+
+navigation_steps:
+  - action: click
+    target: Me
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007765"
+    raw_y_hex: "0000107e"
+
+  - action: click
+    target: Email Address
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: Done
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Done"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Username"
+    - "Log Out"
+  by: text
+  timeout: 5

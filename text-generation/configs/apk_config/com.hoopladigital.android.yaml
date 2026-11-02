@@ -1,0 +1,38 @@
+# com.peerspace.app.yaml
+
+app_name: "Hoopla"
+
+delay_detect:
+  - "SIGN UP"
+
+navigation_steps:
+
+  - action: click
+    target: SIGN UP
+    by: text
+    retry: 3
+
+  - action: click
+    target: Let's Go!
+    by: text
+    retry: 3
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00002a4c"
+    raw_y_hex: "000029a2"
+
+  - action: click
+    target: "Next"
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Don’t see your library? This may be because they do not offer hoopla yet."
+  by: text
+
+verify_appear:
+  targets:
+    - "Connect With Your Library"
+  by: text

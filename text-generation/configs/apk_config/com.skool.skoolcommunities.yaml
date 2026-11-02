@@ -1,0 +1,35 @@
+# com.peerspace.app.yaml
+
+app_name: "Skool"
+
+delay_detect:
+    - "Log in to Skool"
+
+navigation_steps:
+  - action: click
+    target: Sign up for free
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+    delay: 5
+
+  - action: click
+    target: SIGN UP
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "SIGN UP"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "We sent you a code"
+  by: text
+  timeout: 3
+

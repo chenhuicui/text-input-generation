@@ -1,0 +1,44 @@
+# com.peerspace.app.yaml
+
+app_name: "Fable"
+
+delay_detect:
+    - "Home"
+    - "Clubs"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007632"
+    raw_y_hex: "00006fae"
+
+  - action: click
+    target: List
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00006d32"
+    raw_y_hex: "00004ee0"
+
+  - action: click
+    target: Done
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Make Private"
+  by: text
+  timeout: 2
+
+verify_appear:
+  targets:
+    - "Sort"
+    - "Filters"
+  by: text
+  timeout: 2
+
+

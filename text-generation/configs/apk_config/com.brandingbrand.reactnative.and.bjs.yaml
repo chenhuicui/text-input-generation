@@ -1,0 +1,34 @@
+# com.peerspace.app.yaml
+
+app_name: "BJ's"
+
+delay_detect:
+    - "Welcome to BJ's"
+
+navigation_steps:
+  - action: click
+    target: Home
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "0000634c"
+    raw_y_hex: "00000c53"
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "Home"
+    - "Shop"
+  by: text
+  timeout: 10
+
+verify_appear:
+  targets:
+    - "SET AS MY GAS STATION"
+  by: text
+  timeout: 10

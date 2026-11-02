@@ -1,0 +1,32 @@
+app_name: "Lime"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00000dcc"
+    raw_y_hex: "00000dcd"
+
+  - action: click
+    target: Settings
+    by: text
+    retry: 3
+
+  - action: click
+    target: Phone
+    by: text
+    retry: 3
+    delay: 5
+
+verify_action:
+  - action: click
+    target: Next
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Next"
+    - "Phone Number"
+  by: text
+  match_mode: all
+  timeout: 5

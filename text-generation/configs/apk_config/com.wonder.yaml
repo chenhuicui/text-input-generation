@@ -1,0 +1,39 @@
+# com.peerspace.app.yaml
+
+app_name: "Elevate"
+
+delay_detect:
+    - "Me"
+
+navigation_steps:
+  - action: click
+    target: Me
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000074ff"
+    raw_y_hex: "00000e34"
+
+  - action: click
+    target: FIRST NAME
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: OK
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "FIRST NAME"
+    - "OK"
+  by: text
+
+verify_appear:
+  targets:
+    - "FIRST NAME"
+  by: text

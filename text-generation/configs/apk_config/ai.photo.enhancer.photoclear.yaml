@@ -1,0 +1,43 @@
+app_name: "AI Photo Enhancer"
+
+delay_detect:
+  - "Restore"
+
+navigation_steps:
+  - action: click
+    type: back
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007632"
+    raw_y_hex: "00000b62"
+
+  - action: click
+    type: text
+    target: Feedback or Suggestions
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000068ff"
+    raw_y_hex: "00001623"
+
+  - action: click
+    type: text
+    target: Others
+
+verify_action:
+  - action: click
+    type: text
+    target: Send
+
+  - action: click
+    type: back
+
+  - action: click
+    type: back
+
+verify_appear:
+  targets:
+    - "Thanks! We will do our best to bring a better user experience."
+  by: text
+  timeout: 5

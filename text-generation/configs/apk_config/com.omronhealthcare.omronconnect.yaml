@@ -1,0 +1,34 @@
+# com.peerspace.app.yaml
+
+app_name: "OMRON connect"
+
+delay_detect:
+    - "Manual Reading"
+
+navigation_steps:
+  - action: click
+    target: Manual Reading
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    target: ADD
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "ADD"
+    - "Pul"
+  by: text
+  timeout: 3
+
+verify_appear:
+  targets:
+    - "Reading transferred successfully!"
+    - "Manual Reading"
+    - "My Diary"
+  by: text
+  mode: any
+  timeout: 3

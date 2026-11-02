@@ -1,0 +1,22 @@
+# com.peerspace.app.yaml
+
+app_name: "IHOP"
+
+delay_detect:
+    - "Sign In"
+
+navigation_steps:
+  - action: click
+    target: Locations
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "We're having trouble finding an IHOP near you."
+  by: text
+

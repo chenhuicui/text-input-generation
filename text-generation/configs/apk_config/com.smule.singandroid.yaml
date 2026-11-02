@@ -1,0 +1,39 @@
+# com.peerspace.app.yaml
+
+app_name: "Smule"
+
+delay_detect:
+    - "Feed"
+    - "Songbook"
+
+navigation_steps:
+  - action: click
+    target: Songbook
+    by: text
+    retry: 3
+
+  - action: click
+    target: Search for songs, singers, invites…
+    by: text
+    retry: 3
+
+verify_action:
+  - action: click
+    type: enter
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000029ff"
+    raw_y_hex: "0000230b"
+
+verify_disappear:
+  targets:
+    - "Cancel"
+  by: text
+  timeout: 5
+
+verify_appear:
+  targets:
+    - "Duet"
+  by: text
+  timeout: 5

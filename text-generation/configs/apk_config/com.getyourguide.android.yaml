@@ -1,0 +1,38 @@
+# com.peerspace.app.yaml
+
+app_name: "GetYourGuide"
+
+delay_detect:
+    - "Discover"
+    - "Profile"
+
+navigation_steps:
+  - action: click
+    target: Profile
+    by: text
+    retry: 3
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "00005665"
+    raw_y_hex: "00002a70"
+
+verify_action:
+  - action: click
+    target: Save
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "First name"
+  by: text
+  timeout: 3
+
+
+verify_appear:
+  targets:
+    - "Discover"
+    - "Profile"
+  by: text
+  timeout: 3

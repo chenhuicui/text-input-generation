@@ -1,0 +1,21 @@
+app_name: "Cars.com"
+
+delay_detect:
+    - "Home"
+    - "Calculator"
+    - "Search by make"
+
+navigation_steps:
+  - action: click
+    type: text
+    target: Calculator
+
+verify_action:
+  - action: click
+    type: enter
+
+verify_disappear:
+  targets:
+    - "Payments"
+  by: text
+  timeout: 5

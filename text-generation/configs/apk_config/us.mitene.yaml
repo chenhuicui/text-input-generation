@@ -1,0 +1,41 @@
+app_name: "FamilyAlbum"
+
+delay_detect:
+  - "Album"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00007265"
+    raw_y_hex: "00007946"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000011cc"
+    raw_y_hex: "000035a5"
+
+
+verify_action:
+  - action: click
+    target: DONE
+    by: text
+    retry: 3
+
+  - action: click
+    target: OK
+    by: text
+    retry: 3
+
+verify_appear:
+  targets:
+    - "Security Settings"
+  by: text
+  match_mode: any
+  timeout: 3
+
+verify_disappear:
+  targets:
+    - "DONE"
+  by: text
+  match_mode: all
+  timeout: 3

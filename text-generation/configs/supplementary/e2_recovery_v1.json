@@ -1,0 +1,62 @@
+{
+  "schema_version": "e2-recovery-v1-config-1",
+  "recovery_id": "E2-recovery-20260929",
+  "historical_protocol": "E2-structure-v1",
+  "extension_protocol": "E2-abcdef-v1",
+  "structure_config": "e2_structure_v1.json",
+  "abcdef_config": "e2_abcdef_v1.json",
+  "output_dir": "../../output/e2_structure_v1_20260920",
+  "abcdef_output_dir": "../../output/e2_abcdef_v1_20260929_recovered",
+  "external": {
+    "apk_zip": {
+      "path": "/Volumes/Extreme Pro/experiment-materials/llm-android-feedback-experiment-apks/release-assets/apk/all_experiment_apks_20260925.zip",
+      "bytes": 3082251181,
+      "sha256": "4442c62c38d6fec76ffd4434d6446b13d5e212d2ed3285a565979abd7a417c81"
+    },
+    "apk_bundle": {
+      "path": "/Volumes/Extreme Pro/experiment-materials/llm-android-feedback-experiment-apks/release-assets/apk/apk_bundle_20260925",
+      "sha256sums": "SHA256SUMS",
+      "sha256sums_sha256": "58728200ad3a3636e4772e6bf9ed9e20436467665160717c66f86c331a49ebd0",
+      "apk_count": 176
+    },
+    "avd_root": "/Volumes/Extreme Pro/emulator/CD_115page_37bug",
+    "avd_backup_manifest": {
+      "path": "/Volumes/Extreme Pro/emulator/CD_115page_37bug/backups/avd_snapshot_backup_152_20260920_before_oracle_calibration/backup_manifest.json",
+      "sha256": "5bf3441c343152aab24b7db2f3d23904aa5fdea366a2ace34782b121c430c27a",
+      "case_count": 152,
+      "unique_snapshot_count": 152
+    }
+  },
+  "historical_artifacts": {
+    "exact_recovered": {
+      "formal_exclusions": {
+        "path": "../../output/e2_structure_v1_20260920/formal_exclusions.json",
+        "sha256": "905e420adaabcb2b4b48af47114553ae914035be5445101d143c40d8b3dd6d06"
+      }
+    },
+    "unavailable_originals": {
+      "case_registry_sha256": "9926652559e5ec1ee60cf9a215669c9450c71e92a9434b91e0d0ff4e07a0cc47",
+      "formal_oracles_sha256": "0b05837d2c5f2f14cf6a5bc30ccb45a9e10fe229b14b6c62778d54130fca0aa4"
+    }
+  },
+  "reconstructed_artifacts": {
+    "recovery_seed": "../../output/e2_structure_v1_20260920/recovery_seed_registry.json",
+    "formal_exclusions": "../../output/e2_structure_v1_20260920/formal_exclusions_recovered.json",
+    "formal_oracles": "../../output/e2_structure_v1_20260920/formal_oracles.json"
+  },
+  "expected": {
+    "registry_cases": 152,
+    "applicable_cases": 149,
+    "valid_pptr_oracles": 112,
+    "invalid_bug_oracles": 37,
+    "not_applicable_cases": ["P031", "P082", "P104"],
+    "abcdef_blocking_gates": ["formal_run_switch"]
+  },
+  "tracked_recovery_code": [
+    "../../tosem_major/text_input_eval/supplementary/structured_recovery_seed.py",
+    "../../tosem_major/text_input_eval/supplementary/structured_recovered_control_plans.py",
+    "../../tosem_major/text_input_eval/supplementary/structured_live_recalibration.py",
+    "../../tosem_major/text_input_eval/supplementary/structured_recalibration_batch.py",
+    "../../tosem_major/text_input_eval/supplementary/structured_recovery_preflight.py"
+  ]
+}

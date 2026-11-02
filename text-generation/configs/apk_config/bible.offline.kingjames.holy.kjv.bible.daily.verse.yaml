@@ -1,0 +1,39 @@
+app_name: "Bible Daily"
+
+delay_detect:
+  - "Bible"
+
+navigation_steps:
+  - action: click
+    type: text
+    target: Bible
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000062b2"
+    raw_y_hex: "00000ad8"
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000074b2"
+    raw_y_hex: "000018f6"
+
+verify_action:
+  - action: click
+    type: enter
+    delay: 2
+
+  - action: click
+    type: coordinate
+    raw_x_hex: "000031cc"
+    raw_y_hex: "000027e3"
+
+verify_appear:
+  targets:
+    - "Bible"
+    - "Trivia"
+    - "Plan"
+    - "Me"
+    - "Today"
+  by: text
+  timeout: 5

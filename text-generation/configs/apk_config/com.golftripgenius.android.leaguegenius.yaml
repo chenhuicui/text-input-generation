@@ -1,0 +1,27 @@
+app_name: "Golf Genius"
+
+navigation_steps:
+  - action: click
+    type: coordinate
+    raw_x_hex: "00001eb2"
+    raw_y_hex: "00002ab5"
+
+verify_action:
+  - action: click
+    target: SIGN IN
+    by: text
+    retry: 3
+
+verify_disappear:
+  targets:
+    - "Signing in. Please wait..."
+  by: text
+  match_mode: all
+
+verify_appear:
+  targets:
+    - "On the Course"
+    - "Other"
+    - "Legal"
+  by: text
+  match_mode: all
